@@ -1,0 +1,3883 @@
+{
+  "version": 2,
+  "font-faces": [
+    [
+      "C:\\windows\\Fonts\\AcadEref.ttf",
+      "AcadEref",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\AGENCYB.TTF",
+      "Agency FB",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\AGENCYR.TTF",
+      "Agency FB",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\AIGDT___.TTF",
+      "AIGDT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ALGER.TTF",
+      "Algerian",
+      "Regular",
+      400,
+      2
+    ],
+    [
+      "C:\\windows\\Fonts\\AMDT_Symbols.ttf",
+      "AmdtSymbols",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\AMGDT___.ttf",
+      "AMGDT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ANTQUAB.TTF",
+      "Book Antiqua",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ANTQUABI.TTF",
+      "Book Antiqua",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ANTQUAI.TTF",
+      "Book Antiqua",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\arial.ttf",
+      "Arial",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\arialbd.ttf",
+      "Arial",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\arialbi.ttf",
+      "Arial",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ariali.ttf",
+      "Arial",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ARIALN.TTF",
+      "Arial Narrow",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ARIALNB.TTF",
+      "Arial Narrow",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ARIALNBI.TTF",
+      "Arial Narrow",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ARIALNI.TTF",
+      "Arial Narrow",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova-Bold.ttf",
+      "Arial Nova",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova-BoldItalic.ttf",
+      "Arial Nova",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova-Italic.ttf",
+      "Arial Nova",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova-Light.ttf",
+      "Arial Nova Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova-LightItalic.ttf",
+      "Arial Nova Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNova.ttf",
+      "Arial Nova",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond-Bold.ttf",
+      "Arial Nova Cond",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond-BoldItalic.ttf",
+      "Arial Nova Cond",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond-Italic.ttf",
+      "Arial Nova Cond",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond-Light.ttf",
+      "Arial Nova Cond Light",
+      "Regular",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond-LightItalic.ttf",
+      "Arial Nova Cond Light",
+      "Italic",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ArialNovaCond.ttf",
+      "Arial Nova Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ARIALUNI.ttf",
+      "Arial Unicode MS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ariblk.ttf",
+      "Arial Black",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ARLRDBD.TTF",
+      "Arial Rounded MT Bold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Black Italic.ttf",
+      "Artifakt Element",
+      "Black Italic",
+      800,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Black.ttf",
+      "Artifakt Element",
+      "Black",
+      800,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Bold Italic.ttf",
+      "Artifakt Element",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Bold.ttf",
+      "Artifakt Element",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Book Italic.ttf",
+      "Artifakt Element",
+      "Book Italic",
+      450,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Book.ttf",
+      "Artifakt Element",
+      "Regular",
+      450,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Hair Italic.ttf",
+      "Artifakt Element",
+      "Hair Italic",
+      100,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Hair.ttf",
+      "Artifakt Element",
+      "Hair",
+      100,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Heavy Italic.ttf",
+      "Artifakt Element",
+      "Heavy Italic",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Heavy.ttf",
+      "Artifakt Element",
+      "Heavy",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Italic.ttf",
+      "Artifakt Element",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Light Italic.ttf",
+      "Artifakt Element",
+      "Light Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element LIght.ttf",
+      "Artifakt Element",
+      "Light",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Medium Italic.ttf",
+      "Artifakt Element",
+      "Medium Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Medium.ttf",
+      "Artifakt Element",
+      "Medium",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Regular.ttf",
+      "Artifakt Element",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Thin Italic.ttf",
+      "Artifakt Element",
+      "Thin Italic",
+      200,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Artifakt Element Thin.ttf",
+      "Artifakt Element",
+      "Thin",
+      200,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\bahnschrift.ttf",
+      "Bahnschrift",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BASKVILL.TTF",
+      "Baskerville Old Face",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BAUHS93.TTF",
+      "Bauhaus 93",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BELL.TTF",
+      "Bell MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BELLB.TTF",
+      "Bell MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BELLI.TTF",
+      "Bell MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BERNHC.TTF",
+      "Bernard MT Condensed",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\bgothl.ttf",
+      "BankGothic Lt BT",
+      "Light",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\bgothm.ttf",
+      "BankGothic Md BT",
+      "Medium",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\BKANT.TTF",
+      "Book Antiqua",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_B.TTF",
+      "Bodoni MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_BI.TTF",
+      "Bodoni MT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_BLAI.TTF",
+      "Bodoni MT Black",
+      "Italic",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_BLAR.TTF",
+      "Bodoni MT Black",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_CB.TTF",
+      "Bodoni MT Condensed",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_CBI.TTF",
+      "Bodoni MT Condensed",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_CI.TTF",
+      "Bodoni MT Condensed",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_CR.TTF",
+      "Bodoni MT Condensed",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_I.TTF",
+      "Bodoni MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_PSTC.TTF",
+      "Bodoni MT Poster Compressed",
+      "Regular",
+      300,
+      2
+    ],
+    [
+      "C:\\windows\\Fonts\\BOD_R.TTF",
+      "Bodoni MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOOKOS.TTF",
+      "Bookman Old Style",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOOKOSB.TTF",
+      "Bookman Old Style",
+      "Bold",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOOKOSBI.TTF",
+      "Bookman Old Style",
+      "Bold Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BOOKOSI.TTF",
+      "Bookman Old Style",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRADHITC.TTF",
+      "Bradley Hand ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRITANIC.TTF",
+      "Britannic Bold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRLNSB.TTF",
+      "Berlin Sans FB",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRLNSDB.TTF",
+      "Berlin Sans FB Demi",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRLNSR.TTF",
+      "Berlin Sans FB",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BROADW.TTF",
+      "Broadway",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BRUSHSCI.TTF",
+      "Brush Script MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\BSSYM7.TTF",
+      "Bookshelf Symbol 7",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibri.ttf",
+      "Calibri",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibrib.ttf",
+      "Calibri",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibrii.ttf",
+      "Calibri",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibril.ttf",
+      "Calibri Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibrili.ttf",
+      "Calibri Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\calibriz.ttf",
+      "Calibri",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALIFB.TTF",
+      "Californian FB",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALIFI.TTF",
+      "Californian FB",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALIFR.TTF",
+      "Californian FB",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALIST.TTF",
+      "Calisto MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALISTB.TTF",
+      "Calisto MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALISTBI.TTF",
+      "Calisto MT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CALISTI.TTF",
+      "Calisto MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\cambria.ttc",
+      "Cambria",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\cambriab.ttf",
+      "Cambria",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\cambriai.ttf",
+      "Cambria",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\cambriaz.ttf",
+      "Cambria",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candara.ttf",
+      "Candara",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candarab.ttf",
+      "Candara",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candarai.ttf",
+      "Candara",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candaral.ttf",
+      "Candara Light",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candarali.ttf",
+      "Candara Light",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Candaraz.ttf",
+      "Candara",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CASTELAR.TTF",
+      "Castellar",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CENSCBK.TTF",
+      "Century Schoolbook",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CENTAUR.TTF",
+      "Centaur",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CENTURY.TTF",
+      "Century",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CHILLER.TTF",
+      "Chiller",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\cityb___.ttf",
+      "CityBlueprint",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\COLONNA.TTF",
+      "Colonna MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\comic.ttf",
+      "Comic Sans MS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\comicbd.ttf",
+      "Comic Sans MS",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\comici.ttf",
+      "Comic Sans MS",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\comicz.ttf",
+      "Comic Sans MS",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\compi.ttf",
+      "CommercialPi BT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\complex_.ttf",
+      "Complex",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\comsc.ttf",
+      "CommercialScript",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\consola.ttf",
+      "Consolas",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\consolab.ttf",
+      "Consolas",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\consolai.ttf",
+      "Consolas",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\consolaz.ttf",
+      "Consolas",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\constan.ttf",
+      "Constantia",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\constanb.ttf",
+      "Constantia",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\constani.ttf",
+      "Constantia",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\constanz.ttf",
+      "Constantia",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\COOPBL.TTF",
+      "Cooper Black",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\COPRGTB.TTF",
+      "Copperplate Gothic Bold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\COPRGTL.TTF",
+      "Copperplate Gothic Light",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbel.ttf",
+      "Corbel",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbelb.ttf",
+      "Corbel",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbeli.ttf",
+      "Corbel",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbell.ttf",
+      "Corbel Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbelli.ttf",
+      "Corbel Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\corbelz.ttf",
+      "Corbel",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\counb___.ttf",
+      "CountryBlueprint",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\cour.ttf",
+      "Courier New",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\courbd.ttf",
+      "Courier New",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\courbi.ttf",
+      "Courier New",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\couri.ttf",
+      "Courier New",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\CURLZ___.TTF",
+      "Curlz MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\DUBAI-BOLD.TTF",
+      "Dubai",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\DUBAI-LIGHT.TTF",
+      "Dubai Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\DUBAI-MEDIUM.TTF",
+      "Dubai Medium",
+      "Regular",
+      500,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\DUBAI-REGULAR.TTF",
+      "Dubai",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\dutch.ttf",
+      "Dutch801 Rm BT",
+      "Roman",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\dutchb.ttf",
+      "Dutch801 Rm BT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\dutchbi.ttf",
+      "Dutch801 Rm BT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\dutcheb.ttf",
+      "Dutch801 XBd BT",
+      "Extra Bold",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\dutchi.ttf",
+      "Dutch801 Rm BT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ebrima.ttf",
+      "Ebrima",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ebrimabd.ttf",
+      "Ebrima",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ELEPHNT.TTF",
+      "Elephant",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ELEPHNTI.TTF",
+      "Elephant",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ENGR.TTF",
+      "Engravers MT",
+      "Regular",
+      500,
+      7
+    ],
+    [
+      "C:\\windows\\Fonts\\ERASBD.TTF",
+      "Eras Bold ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ERASDEMI.TTF",
+      "Eras Demi ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ERASLGHT.TTF",
+      "Eras Light ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ERASMD.TTF",
+      "Eras Medium ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\eurro___.ttf",
+      "EuroRoman",
+      "Oblique",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\eurr____.ttf",
+      "EuroRoman",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FELIXTI.TTF",
+      "Felix Titling",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FORTE.TTF",
+      "Forte",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRABK.TTF",
+      "Franklin Gothic Book",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRABKIT.TTF",
+      "Franklin Gothic Book",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRADM.TTF",
+      "Franklin Gothic Demi",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRADMCN.TTF",
+      "Franklin Gothic Demi Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\FRADMIT.TTF",
+      "Franklin Gothic Demi",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRAHV.TTF",
+      "Franklin Gothic Heavy",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRAHVIT.TTF",
+      "Franklin Gothic Heavy",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\framd.ttf",
+      "Franklin Gothic Medium",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRAMDCN.TTF",
+      "Franklin Gothic Medium Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\framdit.ttf",
+      "Franklin Gothic Medium",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FREESCPT.TTF",
+      "Freestyle Script",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FRSCRIPT.TTF",
+      "French Script MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\FTLTLT.TTF",
+      "Footlight MT Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Gabriola.ttf",
+      "Gabriola",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gadugi.ttf",
+      "Gadugi",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gadugib.ttf",
+      "Gadugi",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GARA.TTF",
+      "Garamond",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GARABD.TTF",
+      "Garamond",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GARAIT.TTF",
+      "Garamond",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gdt_____.ttf",
+      "GDT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GENISO.ttf",
+      "GENISO",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\georgia.ttf",
+      "Georgia",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\georgiab.ttf",
+      "Georgia",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\georgiai.ttf",
+      "Georgia",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-Black.ttf",
+      "Georgia Pro Black",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-BlackItalic.ttf",
+      "Georgia Pro Black",
+      "Italic",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-Bold.ttf",
+      "Georgia Pro",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-BoldItalic.ttf",
+      "Georgia Pro",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondBlack.ttf",
+      "Georgia Pro Cond Black",
+      "Regular",
+      900,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondBlackItalic.ttf",
+      "Georgia Pro Cond Black",
+      "Italic",
+      900,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondBold.ttf",
+      "Georgia Pro Cond",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondBoldItalic.ttf",
+      "Georgia Pro Cond",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondItalic.ttf",
+      "Georgia Pro Cond",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondLight.ttf",
+      "Georgia Pro Cond Light",
+      "Regular",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondLightItalic.ttf",
+      "Georgia Pro Cond Light",
+      "Italic",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondRegular.ttf",
+      "Georgia Pro Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondSemiBold.ttf",
+      "Georgia Pro Cond Semibold",
+      "Regular",
+      600,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-CondSemiBoldItalic.ttf",
+      "Georgia Pro Cond Semibold",
+      "Italic",
+      600,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-Italic.ttf",
+      "Georgia Pro",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-Light.ttf",
+      "Georgia Pro Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-LightItalic.ttf",
+      "Georgia Pro Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-Regular.ttf",
+      "Georgia Pro",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-SemiBold.ttf",
+      "Georgia Pro Semibold",
+      "Regular",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GeorgiaPro-SemiBoldItalic.ttf",
+      "Georgia Pro Semibold",
+      "Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\georgiaz.ttf",
+      "Georgia",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GIGI.TTF",
+      "Gigi",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GILBI___.TTF",
+      "Gill Sans MT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GILB____.TTF",
+      "Gill Sans MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GILC____.TTF",
+      "Gill Sans MT Condensed",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GILI____.TTF",
+      "Gill Sans MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansBoItNova.ttf",
+      "Gill Sans Nova",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansBoNova.ttf",
+      "Gill Sans Nova",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondBoItNova.ttf",
+      "Gill Sans Nova Cond",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondBoNova.ttf",
+      "Gill Sans Nova Cond",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondExtraItNova.ttf",
+      "Gill Sans Nova Cond XBd",
+      "Italic",
+      800,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondExtraNova.ttf",
+      "Gill Sans Nova Cond XBd",
+      "Regular",
+      800,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondItNova.ttf",
+      "Gill Sans Nova Cond",
+      "Italic",
+      500,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondLightItNova.ttf",
+      "Gill Sans Nova Cond Lt",
+      "Italic",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondLightNova.ttf",
+      "Gill Sans Nova Cond Lt",
+      "Regular",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondNova.ttf",
+      "Gill Sans Nova Cond",
+      "Regular",
+      500,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansCondUltraBoNova.ttf",
+      "Gill Sans Nova Cond Ultra Bold",
+      "Regular",
+      900,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansItNova.ttf",
+      "Gill Sans Nova",
+      "Italic",
+      500,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansLightItNova.ttf",
+      "Gill Sans Nova Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansLightNova.ttf",
+      "Gill Sans Nova Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansNova.ttf",
+      "Gill Sans Nova",
+      "Regular",
+      500,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GillSansUltraBoNova.ttf",
+      "Gill Sans Nova Ultra Bold",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GILLUBCD.TTF",
+      "Gill Sans Ultra Bold Condensed",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\GILSANUB.TTF",
+      "Gill Sans Ultra Bold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GIL_____.TTF",
+      "Gill Sans MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GLECB.TTF",
+      "Gloucester MT Extra Condensed",
+      "Regular",
+      400,
+      2
+    ],
+    [
+      "C:\\windows\\Fonts\\GLSNECB.TTF",
+      "Gill Sans MT Ext Condensed Bold",
+      "Regular",
+      400,
+      2
+    ],
+    [
+      "C:\\windows\\Fonts\\GOTHIC.TTF",
+      "Century Gothic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GOTHICB.TTF",
+      "Century Gothic",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GOTHICBI.TTF",
+      "Century Gothic",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gothice_.ttf",
+      "GothicE",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gothicg_.ttf",
+      "GothicG",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GOTHICI.TTF",
+      "Century Gothic",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\gothici_.ttf",
+      "GothicI",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GOUDOS.TTF",
+      "Goudy Old Style",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\GOUDOSB.TTF",
+      "Goudy Old Style",
+      "Bold",
+      700,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\GOUDOSI.TTF",
+      "Goudy Old Style",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\GOUDYSTO.TTF",
+      "Goudy Stout",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\greekc__.ttf",
+      "GreekC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\greeks__.ttf",
+      "GreekS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HARLOWSI.TTF",
+      "Harlow Solid Italic",
+      "Italic",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\HARNGTON.TTF",
+      "Harrington",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HATTEN.TTF",
+      "Haettenschweiler",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\himalaya.ttf",
+      "Microsoft Himalaya",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified.ttf",
+      "HP Simplified",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\hpsimplifiedhans-light.ttf",
+      "HP Simplified Hans Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\hpsimplifiedhans-regular.ttf",
+      "HP Simplified Hans",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\hpsimplifiedjpan-light.ttf",
+      "HP Simplified Jpan Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\hpsimplifiedjpan-regular.ttf",
+      "HP Simplified Jpan",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified_BdIt.ttf",
+      "HP Simplified",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified_It.ttf",
+      "HP Simplified",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified_Lt.ttf",
+      "HP Simplified Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified_LtIt.ttf",
+      "HP Simplified Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HPSimplified_Rg.ttf",
+      "HP Simplified",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HTOWERT.TTF",
+      "High Tower Text",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\HTOWERTI.TTF",
+      "High Tower Text",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\impact.ttf",
+      "Impact",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\IMPRISHA.TTF",
+      "Imprint MT Shadow",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\INFROMAN.TTF",
+      "Informal Roman",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\Inkfree.ttf",
+      "Ink Free",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocp2__.ttf",
+      "ISOCP2",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocp3__.ttf",
+      "ISOCP3",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocpeui.ttf",
+      "ISOCPEUR",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocpeur.ttf",
+      "ISOCPEUR",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocp___.ttf",
+      "ISOCP",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isoct2__.ttf",
+      "ISOCT2",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isoct3__.ttf",
+      "ISOCT3",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocteui.ttf",
+      "ISOCTEUR",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isocteur.ttf",
+      "ISOCTEUR",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\isoct___.ttf",
+      "ISOCT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\italicc_.ttf",
+      "ItalicC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\italict_.ttf",
+      "ItalicT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\italic__.ttf",
+      "Italic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ITCBLKAD.TTF",
+      "Blackadder ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ITCEDSCR.TTF",
+      "Edwardian Script ITC",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\ITCKRIST.TTF",
+      "Kristen ITC",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\javatext.ttf",
+      "Javanese Text",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\JOKERMAN.TTF",
+      "Jokerman",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\JUICE___.TTF",
+      "Juice ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\KUNSTLER.TTF",
+      "Kunstler Script",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LATINWD.TTF",
+      "Wide Latin",
+      "Regular",
+      400,
+      9
+    ],
+    [
+      "C:\\windows\\Fonts\\LBRITE.TTF",
+      "Lucida Bright",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LBRITED.TTF",
+      "Lucida Bright",
+      "Demibold",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LBRITEDI.TTF",
+      "Lucida Bright",
+      "Demibold Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LBRITEI.TTF",
+      "Lucida Bright",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LCALLIG.TTF",
+      "Lucida Calligraphy",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LeelaUIb.ttf",
+      "Leelawadee UI",
+      "\u0388\u03bd\u03c4\u03bf\u03bd\u03b1",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LEELAWAD.TTF",
+      "Leelawadee",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LEELAWDB.TTF",
+      "Leelawadee",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LeelawUI.ttf",
+      "Leelawadee UI",
+      "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LeelUIsl.ttf",
+      "Leelawadee UI Semilight",
+      "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+      350,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LFAX.TTF",
+      "Lucida Fax",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LFAXD.TTF",
+      "Lucida Fax",
+      "Demibold",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LFAXDI.TTF",
+      "Lucida Fax",
+      "Demibold Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LFAXI.TTF",
+      "Lucida Fax",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LHANDW.TTF",
+      "Lucida Handwriting",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LSANS.TTF",
+      "Lucida Sans",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LSANSD.TTF",
+      "Lucida Sans",
+      "Demibold Roman",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LSANSDI.TTF",
+      "Lucida Sans",
+      "Demibold Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LSANSI.TTF",
+      "Lucida Sans",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\LTYPE.TTF",
+      "Lucida Sans Typewriter",
+      "Regular",
+      400,
+      4
+    ],
+    [
+      "C:\\windows\\Fonts\\LTYPEB.TTF",
+      "Lucida Sans Typewriter",
+      "Bold",
+      600,
+      4
+    ],
+    [
+      "C:\\windows\\Fonts\\LTYPEBO.TTF",
+      "Lucida Sans Typewriter",
+      "Bold Oblique",
+      600,
+      4
+    ],
+    [
+      "C:\\windows\\Fonts\\LTYPEO.TTF",
+      "Lucida Sans Typewriter",
+      "Oblique",
+      400,
+      4
+    ],
+    [
+      "C:\\windows\\Fonts\\lucon.ttf",
+      "Lucida Console",
+      "Regular",
+      400,
+      4
+    ],
+    [
+      "C:\\windows\\Fonts\\l_10646.ttf",
+      "Lucida Sans Unicode",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MAGNETOB.TTF",
+      "Magneto",
+      "Bold",
+      700,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\MAIAN.TTF",
+      "Maiandra GD",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\malgun.ttf",
+      "Malgun Gothic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\malgunbd.ttf",
+      "Malgun Gothic",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\malgunsl.ttf",
+      "Malgun Gothic Semilight",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\marlett.ttf",
+      "Marlett",
+      "Regular",
+      500,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MATURASC.TTF",
+      "Matura MT Script Capitals",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\micross.ttf",
+      "Microsoft Sans Serif",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mingliub.ttc",
+      "MingLiU-ExtB",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MISTRAL.TTF",
+      "Mistral",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mmrtext.ttf",
+      "Myanmar Text",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mmrtextb.ttf",
+      "Myanmar Text",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MOD20.TTF",
+      "Modern No. 20",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monbaiti.ttf",
+      "Mongolian Baiti",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monos.ttf",
+      "Monospac821 BT",
+      "Roman",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monosb.ttf",
+      "Monospac821 BT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monosbi.ttf",
+      "Monospac821 BT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monosi.ttf",
+      "Monospac821 BT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\monotxt_.ttf",
+      "Monotxt",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msgothic.ttc",
+      "MS Gothic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msjh.ttc",
+      "\u5fae\u8edf\u6b63\u9ed1\u9ad4",
+      "Normal",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msjhbd.ttc",
+      "\u5fae\u8edf\u6b63\u9ed1\u9ad4",
+      "Negreta",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msjhl.ttc",
+      "\u5fae\u8edf\u6b63\u9ed1\u9ad4 Light",
+      "Regular",
+      290,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MSUIGHUB.TTF",
+      "Microsoft Uighur",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MSUIGHUR.TTF",
+      "Microsoft Uighur",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msyh.ttc",
+      "Microsoft YaHei",
+      "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msyhbd.ttc",
+      "Microsoft YaHei",
+      "\u0388\u03bd\u03c4\u03bf\u03bd\u03b1",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msyhl.ttc",
+      "Microsoft YaHei Light",
+      "Regular",
+      290,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\msyi.ttf",
+      "Microsoft Yi Baiti",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MTCORSVA.TTF",
+      "Monotype Corsiva",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\MTEXTRA.TTF",
+      "MT Extra",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy1.ttf",
+      "Prx1",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy2.ttf",
+      "Prx2",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy3.ttf",
+      "Prx3",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy4.ttf",
+      "Prx4",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy5.ttf",
+      "Prx5",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy6.ttf",
+      "Prx6",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy7.ttf",
+      "Prx7",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy8.ttf",
+      "Prx8",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mtproxy9.ttf",
+      "Prx9",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\mvboli.ttf",
+      "MV Boli",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\NHaasGroteskTXPro-It.ttf",
+      "Neue Haas Grotesk Text Pro",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\NHaasGroteskTXPro-Rg.ttf",
+      "Neue Haas Grotesk Text Pro",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\NIAGENG.TTF",
+      "Niagara Engraved",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\NIAGSOL.TTF",
+      "Niagara Solid",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\Nirmala.ttc",
+      "Nirmala UI",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ntailu.ttf",
+      "Microsoft New Tai Lue",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ntailub.ttf",
+      "Microsoft New Tai Lue",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\OCRAEXT.TTF",
+      "OCR A Extended",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\OLDENGL.TTF",
+      "Old English Text MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ONYX.TTF",
+      "Onyx",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\OUTLOOK.TTF",
+      "MS Outlook",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\pala.ttf",
+      "Palatino Linotype",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\palab.ttf",
+      "Palatino Linotype",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\palabi.ttf",
+      "Palatino Linotype",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\palai.ttf",
+      "Palatino Linotype",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PALSCRI.TTF",
+      "Palace Script MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\panroman.ttf",
+      "PanRoman",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PAPYRUS.TTF",
+      "Papyrus",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PARCHM.TTF",
+      "Parchment",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PERBI___.TTF",
+      "Perpetua",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PERB____.TTF",
+      "Perpetua",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PERI____.TTF",
+      "Perpetua",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PERTIBD.TTF",
+      "Perpetua Titling MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PERTILI.TTF",
+      "Perpetua Titling MT",
+      "Light",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PER_____.TTF",
+      "Perpetua",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\phagspa.ttf",
+      "Microsoft PhagsPa",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\phagspab.ttf",
+      "Microsoft PhagsPa",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PLAYBILL.TTF",
+      "Playbill",
+      "Regular",
+      400,
+      1
+    ],
+    [
+      "C:\\windows\\Fonts\\POORICH.TTF",
+      "Poor Richard",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\PRISTINA.TTF",
+      "Pristina",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RAGE.TTF",
+      "Rage Italic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RAVIE.TTF",
+      "Ravie",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\REFSAN.TTF",
+      "MS Reference Sans Serif",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\REFSPCL.TTF",
+      "MS Reference Specialty",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCCB___.TTF",
+      "Rockwell Condensed",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCC____.TTF",
+      "Rockwell Condensed",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCK.TTF",
+      "Rockwell",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCKB.TTF",
+      "Rockwell",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCKBI.TTF",
+      "Rockwell",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCKEB.TTF",
+      "Rockwell Extra Bold",
+      "Regular",
+      800,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\ROCKI.TTF",
+      "Rockwell",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-Bold.ttf",
+      "Rockwell Nova",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-BoldItalic.ttf",
+      "Rockwell Nova",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-ExtraBold.ttf",
+      "Rockwell Nova Extra Bold",
+      "Regular",
+      800,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-ExtraBoldItalic.ttf",
+      "Rockwell Nova Extra Bold",
+      "Italic",
+      800,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-Italic.ttf",
+      "Rockwell Nova",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-Light.ttf",
+      "Rockwell Nova Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova-LightItalic.ttf",
+      "Rockwell Nova Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNova.ttf",
+      "Rockwell Nova",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond-Bold.ttf",
+      "Rockwell Nova Cond",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond-BoldItalic.ttf",
+      "Rockwell Nova Cond",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond-Italic.ttf",
+      "Rockwell Nova Cond",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond-Light.ttf",
+      "Rockwell Nova Cond Light",
+      "Regular",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond-LightItalic.ttf",
+      "Rockwell Nova Cond Light",
+      "Italic",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\RockwellNovaCond.ttf",
+      "Rockwell Nova Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\romab___.ttf",
+      "Romantic",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romai___.ttf",
+      "Romantic",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romanc__.ttf",
+      "RomanC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romand__.ttf",
+      "RomanD",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romans__.ttf",
+      "RomanS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romantic.ttf",
+      "Romantic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\romant__.ttf",
+      "RomanT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\sanssbo_.ttf",
+      "SansSerif",
+      "BoldOblique",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\sanssb__.ttf",
+      "SansSerif",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SansSerifCollection.ttf",
+      "Sans Serif Collection",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\sansso__.ttf",
+      "SansSerif",
+      "Oblique",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\sanss___.ttf",
+      "SansSerif",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SCHLBKB.TTF",
+      "Century Schoolbook",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SCHLBKBI.TTF",
+      "Century Schoolbook",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SCHLBKI.TTF",
+      "Century Schoolbook",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SCRIPTBL.TTF",
+      "Script MT Bold",
+      "Regular",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\scriptc_.ttf",
+      "ScriptC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\scripts_.ttf",
+      "ScriptS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segmdl2.ttf",
+      "Segoe MDL2 Assets",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SegoeIcons.ttf",
+      "Segoe Fluent Icons",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoepr.ttf",
+      "Segoe Print",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeprb.ttf",
+      "Segoe Print",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoesc.ttf",
+      "Segoe Script",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoescb.ttf",
+      "Segoe Script",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeui.ttf",
+      "Segoe UI",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeuib.ttf",
+      "Segoe UI",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeuii.ttf",
+      "Segoe UI",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeuil.ttf",
+      "Segoe UI Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeuisl.ttf",
+      "Segoe UI Semilight",
+      "Regular",
+      350,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\segoeuiz.ttf",
+      "Segoe UI",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguibl.ttf",
+      "Segoe UI Black",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguibli.ttf",
+      "Segoe UI Black",
+      "Italic",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguiemj.ttf",
+      "Segoe UI Emoji",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguihis.ttf",
+      "Segoe UI Historic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguili.ttf",
+      "Segoe UI Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguisb.ttf",
+      "Segoe UI Semibold",
+      "Regular",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguisbi.ttf",
+      "Segoe UI Semibold",
+      "Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguisli.ttf",
+      "Segoe UI Semilight",
+      "Italic",
+      350,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\seguisym.ttf",
+      "Segoe UI Symbol",
+      "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SegUIVar.ttf",
+      "Segoe UI Variable",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SHOWG.TTF",
+      "Showcard Gothic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\simplex_.ttf",
+      "Simplex",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\simsun.ttc",
+      "SimSun",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\simsunb.ttf",
+      "SimSun-ExtB",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SimsunExtG.ttf",
+      "SimSun-ExtG",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SitkaVF-Italic.ttf",
+      "Sitka Text",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SitkaVF.ttf",
+      "Sitka Text",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\SNAP____.TTF",
+      "Snap ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\STENCIL.TTF",
+      "Stencil",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\stylu.ttf",
+      "Stylus BT",
+      "Roman",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\supef___.ttf",
+      "SuperFrench",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swiss.ttf",
+      "Swis721 BT",
+      "Roman",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissb.ttf",
+      "Swis721 BT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissbi.ttf",
+      "Swis721 BT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissbo.ttf",
+      "Swis721 BdOul BT",
+      "Bold",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissc.ttf",
+      "Swis721 Cn BT",
+      "Roman",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscb.ttf",
+      "Swis721 Cn BT",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscbi.ttf",
+      "Swis721 Cn BT",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscbo.ttf",
+      "Swis721 BdCnOul BT",
+      "Bold Outline",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissci.ttf",
+      "Swis721 Cn BT",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swissck.ttf",
+      "Swis721 BlkCn BT",
+      "Black",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscki.ttf",
+      "Swis721 BlkCn BT",
+      "Black Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscl.ttf",
+      "Swis721 LtCn BT",
+      "Light",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisscli.ttf",
+      "Swis721 LtCn BT",
+      "Light Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\swisse.ttf",
+      "Swis721 Ex BT",
+      "Roman",
+      400,
+      7
+    ],
+    [
+      "C:\\windows\\Fonts\\swisseb.ttf",
+      "Swis721 Ex BT",
+      "Bold",
+      700,
+      7
+    ],
+    [
+      "C:\\windows\\Fonts\\swissek.ttf",
+      "Swis721 BlkEx BT",
+      "Black",
+      400,
+      7
+    ],
+    [
+      "C:\\windows\\Fonts\\swissel.ttf",
+      "Swis721 LtEx BT",
+      "Light",
+      400,
+      7
+    ],
+    [
+      "C:\\windows\\Fonts\\swissi.ttf",
+      "Swis721 BT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissk.ttf",
+      "Swis721 Blk BT",
+      "Black",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swisski.ttf",
+      "Swis721 Blk BT",
+      "Black Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissko.ttf",
+      "Swis721 BlkOul BT",
+      "Black",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissl.ttf",
+      "Swis721 Lt BT",
+      "Light",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\swissli.ttf",
+      "Swis721 Lt BT",
+      "Light Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\syastro_.ttf",
+      "Syastro",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\sylfaen.ttf",
+      "Sylfaen",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\symap___.ttf",
+      "Symap",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\symath__.ttf",
+      "Symath",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\symbol.ttf",
+      "Symbol",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\symeteo_.ttf",
+      "Symeteo",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\symusic_.ttf",
+      "Symusic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\tahoma.ttf",
+      "Tahoma",
+      "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\tahomabd.ttf",
+      "Tahoma",
+      "\u0388\u03bd\u03c4\u03bf\u03bd\u03b1",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\taile.ttf",
+      "Microsoft Tai Le",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\taileb.ttf",
+      "Microsoft Tai Le",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCBI____.TTF",
+      "Tw Cen MT",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCB_____.TTF",
+      "Tw Cen MT",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCCB____.TTF",
+      "Tw Cen MT Condensed",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCCEB.TTF",
+      "Tw Cen MT Condensed Extra Bold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCCM____.TTF",
+      "Tw Cen MT Condensed",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCMI____.TTF",
+      "Tw Cen MT",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TCM_____.TTF",
+      "Tw Cen MT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\techb___.ttf",
+      "TechnicBold",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\techl___.ttf",
+      "TechnicLite",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\technic_.ttf",
+      "Technic",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\TEMPSITC.TTF",
+      "Tempus Sans ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\times.ttf",
+      "Times New Roman",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\timesbd.ttf",
+      "Times New Roman",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\timesbi.ttf",
+      "Times New Roman",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\timesi.ttf",
+      "Times New Roman",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\trebuc.ttf",
+      "Trebuchet MS",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\trebucbd.ttf",
+      "Trebuchet MS",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\trebucbi.ttf",
+      "Trebuchet MS",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\trebucit.ttf",
+      "Trebuchet MS",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\txt_____.ttf",
+      "Txt",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\umath.ttf",
+      "UniversalMath1 BT",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\verdana.ttf",
+      "Verdana",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\verdanab.ttf",
+      "Verdana",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\verdanai.ttf",
+      "Verdana",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-Black.ttf",
+      "Verdana Pro Black",
+      "Regular",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-BlackItalic.ttf",
+      "Verdana Pro Black",
+      "Italic",
+      900,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-Bold.ttf",
+      "Verdana Pro",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-BoldItalic.ttf",
+      "Verdana Pro",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondBlack.ttf",
+      "Verdana Pro Cond Black",
+      "Regular",
+      900,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondBlackItalic.ttf",
+      "Verdana Pro Cond Black",
+      "Italic",
+      900,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondBold.ttf",
+      "Verdana Pro Cond",
+      "Bold",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondBoldItalic.ttf",
+      "Verdana Pro Cond",
+      "Bold Italic",
+      700,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondItalic.ttf",
+      "Verdana Pro Cond",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondLight.ttf",
+      "Verdana Pro Cond Light",
+      "Regular",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondLightItalic.ttf",
+      "Verdana Pro Cond Light",
+      "Italic",
+      300,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondRegular.ttf",
+      "Verdana Pro Cond",
+      "Regular",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondSemiBold.ttf",
+      "Verdana Pro Cond Semibold",
+      "Regular",
+      600,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-CondSemiBoldItalic.ttf",
+      "Verdana Pro Cond Semibold",
+      "Italic",
+      600,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-Italic.ttf",
+      "Verdana Pro",
+      "Italic",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-Light.ttf",
+      "Verdana Pro Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-LightItalic.ttf",
+      "Verdana Pro Light",
+      "Italic",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-Regular.ttf",
+      "Verdana Pro",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-SemiBold.ttf",
+      "Verdana Pro Semibold",
+      "Regular",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VerdanaPro-SemiBoldItalic.ttf",
+      "Verdana Pro Semibold",
+      "Italic",
+      600,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\verdanaz.ttf",
+      "Verdana",
+      "Bold Italic",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\VINERITC.TTF",
+      "Viner Hand ITC",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\vinet.ttf",
+      "Vineta",
+      "Regular",
+      400,
+      6
+    ],
+    [
+      "C:\\windows\\Fonts\\VIVALDII.TTF",
+      "Vivaldi",
+      "Italic",
+      400,
+      3
+    ],
+    [
+      "C:\\windows\\Fonts\\VLADIMIR.TTF",
+      "Vladimir Script",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\webdings.ttf",
+      "Webdings",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\wingding.ttf",
+      "Wingdings",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\WINGDNG2.TTF",
+      "Wingdings 2",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\WINGDNG3.TTF",
+      "Wingdings 3",
+      "Regular",
+      400,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\YuGothB.ttc",
+      "Yu Gothic",
+      "Bold",
+      700,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\YuGothL.ttc",
+      "Yu Gothic Light",
+      "Regular",
+      300,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\YuGothM.ttc",
+      "Yu Gothic Medium",
+      "Regular",
+      500,
+      5
+    ],
+    [
+      "C:\\windows\\Fonts\\YuGothR.ttc",
+      "Yu Gothic",
+      "Regular",
+      400,
+      5
+    ]
+  ]
+}

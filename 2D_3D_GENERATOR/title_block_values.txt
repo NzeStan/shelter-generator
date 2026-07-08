@@ -1,0 +1,25 @@
+# Engineering sheet title block values.
+# Edit the values on the right side. Blank date uses today's date.
+
+drawing_number = PMS-WA-ARCO-038
+project = 
+drawing_title = PMS-WA-ARCO-038
+client = 
+location = 
+company = 
+scale = NTS
+revision = 0
+date = 
+drawn_by = Nnamani, Ifeanyi
+reviewed_by = Ezewoko, Joseph
+approved_by = Chima, Tasieobi
+
+# Logos can be local files in the project root or image URLs.
+# PNG, JPG, and JPEG are supported. Local root files are tried before URLs.
+nlng_logo = nlng_logo.png
+nlng_logo_url = https://res.cloudinary.com/dhhaiy58r/image/upload/v1778834263/png_rgbreg.png
+company_logo = company_logo.png
+company_logo_url = https://res.cloudinary.com/dhhaiy58r/image/upload/v1778834262/ARCO1_c1hvk5.png
+
+# PDF output folder, relative to the project root unless absolute.
+pdf_output_dir = pdf_output

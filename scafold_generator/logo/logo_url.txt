@@ -1,0 +1,10 @@
+# ── Logo URL Overrides ───────────────────────────────────────────────────────
+# If set, URLs take priority over PNG files in this folder.
+# Leave blank to use nlng_logo.png / company_logo.png instead.
+#
+# Format:
+#   NLNG_URL: https://example.com/nlng.png
+#   COMPANY_URL: https://example.com/arco.png
+
+NLNG_URL:
+COMPANY_URL:

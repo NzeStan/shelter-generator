@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python generate_report.py)",
+      "Bash(python -m generate_report)",
+      "Bash(python -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(where python *)",
+      "Bash(\"C:\\\\Users\\\\nnama\\\\AppData\\\\Local\\\\Python\\\\bin\\\\python.exe\" generate_report.py)",
+      "Bash(\"C:\\\\Users\\\\nnama\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe\" generate_report.py)",
+      "Bash(\"C:\\\\Users\\\\nnama\\\\Desktop\\\\SCAFFOLD\\\\2D_3D_GENERATOR\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import jinja2; print\\(jinja2.__version__\\)\")",
+      "Bash(\"C:\\\\Users\\\\nnama\\\\Desktop\\\\SCAFFOLD\\\\2D_3D_GENERATOR\\\\.venv\\\\Scripts\\\\pip.exe\" list *)",
+      "PowerShell(Get-Command python)",
+      "PowerShell(python -c \"import jinja2\" 2>&1)",
+      "Bash(find \"/c/Users/nnama\" -name \"jinja2\" -type d 2>/dev/null | head -10)",
+      "Read(//c/Users/nnama/**)",
+      "Bash(\".venv/Scripts/python.exe\" generate_report.py)",
+      "Bash(Select-String -Path \"c:\\\\Users\\\\nnama\\\\Desktop\\\\SCAFFOLD\\\\scafold_generator\\\\output\\\\PMS-WA-ARCO-039_Report.html\" -Pattern \"Counterweight.*LOADTYPE|CW.*LOADTYPE|counterweight_load_case\")",
+      "Bash(Select-Object -First 5)"
+    ]
+  }
+}
