@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-038
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-039
+DOCUMENT_NO:         PMS-WA-ARCO-080
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-080
 REVISION:            0
 
 # Integrated outputs
@@ -24,7 +24,7 @@ COUNTERWEIGHT_PIVOT_NODES:   23,38,24
 # Scaffold location and type
 LOCATION:            Jetty-1
 AREA:                B
-SCAFFOLD_TYPE:       Independent Return
+SCAFFOLD_TYPE:       Hanging
 RISK_LEVEL:          High
 
 # Load Intensity (SWL)

@@ -457,9 +457,14 @@ tr:nth-child(even) td { background: var(--bg-row); }
     <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8.5pt; vertical-align:top; padding:2px 8px 2px 0;">BS EN 12811-1, 10.2.3.2 / 10.2.3.3</td>
     <td style="border:none; padding:2px 0; line-height:1.7;">
       A 3-D model was analysed using <strong>STAAD.Pro CONNECT Edition (V22)</strong> in compliance with
-      EN 1993-1-1:2005. Base supports are modelled as pinned with lateral spring stiffness representing
+      EN 1993-1-1:2005.
+      {% if show_frictional_resistance %}
+      Base supports are modelled as pinned with lateral spring stiffness representing
       frictional restraint (KFX/KFZ = {{ structural.frictional_resistance.kfx }} kN).
       Base supports are modelled as elastic spring supports, restrained laterally in both horizontal directions with rotational degrees of freedom released, representing flexible ground contact conditions at each standard foot.
+      {% else %}
+      Supports are modelled as fixed supports, providing full translational and rotational restraint to represent rigid anchorage to the supporting structure.
+      {% endif %}
     </td>
   </tr>
 </table>
