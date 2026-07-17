@@ -746,9 +746,15 @@ tr:nth-child(even) td { background: var(--bg-row); }
 
 {% if counterweight.valid and not counterweight.errors and counterweight.has_demand %}
 <div class="sub-hdr">Counterweight Load Calculation</div>
-<p style="font-size:8.5pt; margin:2px 0 8px;">
-  From STAAD.Pro analysis, the following values were obtained as force acting on the cantilever base.
+<p style="font-size:8.5pt; line-height:1.6; margin:2px 0 4px;">
+  Stability of the cantilever depends on the counterweight's restoring effect balancing the overturning
+  effect of the applied loads, taken about the pivot edge. For each row of base supports, moment about the
+  pivot is summed from the uplift found in the governing STAAD reaction case, then divided by the
+  counterweight's own lever arm to give that row's counterweight demand:
 </p>
+<div style="font-family:'Courier New',monospace; font-size:9pt; margin:0 0 8px 4px;">
+  M = &Sigma;(F &times; d) &nbsp;&nbsp;|&nbsp;&nbsp; CW = M / L
+</div>
 
 {% for row in counterweight.analysis_line_rows %}
 <div class="sub-hdr" style="margin-top:10px;">Counter weight Analysis {{ row.label }}</div>
