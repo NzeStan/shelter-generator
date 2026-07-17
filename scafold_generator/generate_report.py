@@ -69,6 +69,7 @@ import os
 import re
 import sys
 import base64
+import json
 import math
 import subprocess
 from pathlib import Path
@@ -883,6 +884,48 @@ def _counterweight_line_diagram_svg(row, lever):
 """
 
 
+def _counterweight_snapshot_path(project):
+    doc = str(project.get('DOCUMENT_NO') or 'project').replace('/', '_').strip() or 'project'
+    return OUT_DIR / f'{doc}_counterweight_snapshot.json'
+
+
+def _save_counterweight_snapshot(project, result):
+    try:
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        _counterweight_snapshot_path(project).write_text(
+            json.dumps(result, indent=2), encoding='utf-8'
+        )
+    except OSError:
+        pass
+
+
+def _load_counterweight_snapshot(project):
+    path = _counterweight_snapshot_path(project)
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return None
+
+
+def _dl_already_has_counterweight_loads():
+    """True once the DL (LOADTYPE Dead) primary case in staad_command.txt already carries
+    explicit MEMBER LOAD lines beyond self-weight — the signal that the resolved counterweight
+    has been applied and this run is for final-report presentation only. From this point the
+    counterweight design must not be recomputed, no matter what the reactions now show."""
+    path = INPUTS / 'staad_command.txt'
+    if not path.exists():
+        return False
+    text = path.read_text(encoding='utf-8', errors='ignore')
+    match = re.search(r'^LOAD\s+\d+\s+LOADTYPE\s+Dead\b.*$', text, re.IGNORECASE | re.MULTILINE)
+    if not match:
+        return False
+    next_load = re.search(r'^LOAD\s+\d+\b', text[match.end():], re.IGNORECASE | re.MULTILINE)
+    block = text[match.end():match.end() + next_load.start()] if next_load else text[match.end():]
+    return bool(re.search(r'^\s*MEMBER LOAD\b', block, re.IGNORECASE | re.MULTILINE))
+
+
 def _counterweight_design(project, structural):
     result = {
         'enabled': _bool_setting(project.get('COUNTERWEIGHT_ENABLED'), False),
@@ -898,6 +941,18 @@ def _counterweight_design(project, structural):
     }
     if not result['enabled']:
         return result
+
+    if _dl_already_has_counterweight_loads():
+        snapshot = _load_counterweight_snapshot(project)
+        if snapshot:
+            snapshot['message'] = (
+                'Counterweight already applied to DL for this run — this is the design snapshot '
+                'from the run that established it; not recomputed.'
+            )
+            return snapshot
+        # DL already carries applied member loads but no snapshot exists yet (e.g. first-ever
+        # run on this project with the counterweight pre-applied). Compute once now — the save
+        # at the end of this function freezes it for every run after this one.
 
     zone_nodes = _parse_node_list(project.get('COUNTERWEIGHT_ZONE_NODES'))
     nodes = (structural.get('geometry') or {}).get('nodes', {})
@@ -1045,6 +1100,19 @@ def _counterweight_design(project, structural):
     raw_sum_kn = sum(row['raw_cw_kn'] for row in analysis_lines)
 
     if not analysis_lines or raw_sum_kn <= 0.001:
+        # No uplift left in this STAAD run — this is expected once the resolved counterweight
+        # has been applied to DL and the model rerun. The design calculation itself must not be
+        # recomputed from this (now-stabilised) state, since there is no more uplift left to
+        # derive it from. Re-display the snapshot captured the last time real uplift was found,
+        # so the report keeps showing the calculation that the adopted counterweight is based on.
+        snapshot = _load_counterweight_snapshot(project)
+        if snapshot:
+            snapshot['message'] = (
+                'Counterweight resolved — the current STAAD run (with the adopted counterweight applied to '
+                'DL) shows no residual uplift at any base node. The calculation below is the design snapshot '
+                'from the run that established the adopted counterweight.'
+            )
+            return snapshot
         result.update({
             'valid': True,
             'has_demand': False,
@@ -1129,6 +1197,7 @@ def _counterweight_design(project, structural):
         {'label': row['label'], 'svg': _counterweight_line_diagram_svg(row, cw_lever)}
         for row in labelled_lines
     ]
+    _save_counterweight_snapshot(project, result)
     return result
 
 
@@ -1957,6 +2026,7 @@ def main():
     )
     show_frictional_resistance = not _is_hanging_scaffold(project.get('SCAFFOLD_TYPE'))
     has_handrail = bool(hl.get('has_x') or hl.get('has_z'))
+    has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
     show_tie_reactions = _bool_setting(project.get('SHOW_TIE_REACTIONS'), False)
 
     # Cover page tie force display — sum (default) or worst single node
@@ -2046,6 +2116,8 @@ def main():
     counterweight = _counterweight_design(project, structural)
     if counterweight.get('enabled'):
         if counterweight.get('valid') and not counterweight.get('errors') and counterweight.get('has_demand'):
+            if counterweight.get('message'):
+                print(f"  Counterweight: {counterweight['message']}")
             print(f"  Counterweight Load Calculation — {len(counterweight['analysis_line_rows'])} analysis line(s):")
             for row in counterweight['analysis_line_rows']:
                 terms_str = ' + '.join(f"{t['uplift_kn']:.3f}x{t['arm_m']:.2f}" for t in row['terms'])
@@ -2146,6 +2218,7 @@ def main():
         counterweight = counterweight,
         net_global_reaction_summary = net_global_reaction_summary,
         has_handrail = has_handrail,
+        has_ties = has_ties,
         show_assurance_note = show_assurance_note,
         show_frictional_resistance = show_frictional_resistance,
         show_tie_reactions = show_tie_reactions,

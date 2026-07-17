@@ -216,6 +216,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     {% endif %}
   </div>
 
+  {% if has_ties or is_hanging %}
   {% if tie_display_mode == 'worst' and worst_tie %}
   {# ── Design Tie Force: worst single node ── #}
   <div style="margin-top:6px; padding:5px 12px 6px; background:var(--bg-hdr); border-left:4px solid var(--gold);">
@@ -258,6 +259,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     </div>
     {% endif %}
   </div>
+  {% endif %}
   {% endif %}
 
   {# Signatures + Footer — pushed to bottom of cover page #}
@@ -643,6 +645,13 @@ tr:nth-child(even) td { background: var(--bg-row); }
     {% else %}<div class="img-box" style="min-height:140px;"><strong>Wind Load Z</strong><small>load_wind_z.png</small></div>{% endif %}
     <div style="font-size:7.5pt; text-align:center; color:var(--muted); margin-top:2px;">Wind Load Z (WLZ)</div>
   </div>
+  {% if counterweight.enabled %}
+  <div style="flex:1; min-width:140px;">
+    {% if images['load_counterweight'] %}<img src="{{ images['load_counterweight'] }}" class="app-img" style="max-height:180px;"/>
+    {% else %}<div class="img-box" style="min-height:140px;"><strong>Counterweight</strong><small>load_counterweight.png</small></div>{% endif %}
+    <div style="font-size:7.5pt; text-align:center; color:var(--muted); margin-top:2px;">Counterweight Load (CW)</div>
+  </div>
+  {% endif %}
 </div>
 </div>
 
@@ -745,9 +754,9 @@ tr:nth-child(even) td { background: var(--bg-row); }
 <div class="sub-hdr" style="margin-top:10px;">Counter weight Analysis {{ row.label }}</div>
 {% for d in counterweight.diagrams %}{% if d.label == row.label %}{{ d.svg | safe }}{% endif %}{% endfor %}
 <div style="font-family:'Courier New',monospace; font-size:9pt; line-height:1.8; margin:0 0 8px 4px;">
-  {% for term in row.terms %}{{ term.uplift_kn }} x {{ term.arm_m }}{% if not loop.last %} + {% endif %}{% endfor %}<br/>
-  = {{ row.terms_sum_kn }} kN<br/>
-  CW = {{ row.terms_sum_kn }} / {{ counterweight.cw_lever_m }}<br/>
+  {% for term in row.terms %}{{ term.uplift_kn }} kN x {{ term.arm_m }} m{% if not loop.last %} + {% endif %}{% endfor %}<br/>
+  = {{ row.terms_sum_kn }} kN&middot;m<br/>
+  CW = {{ row.terms_sum_kn }} kN&middot;m / {{ counterweight.cw_lever_m }} m<br/>
   CW = <strong>{{ row.raw_cw_kn }} kN</strong>
 </div>
 {% endfor %}

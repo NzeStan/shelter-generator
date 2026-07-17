@@ -11,7 +11,7 @@ scale = NTS
 revision = 0
 date = 
 drawn_by = Nnamani, Ifeanyi
-reviewed_by = Ezewoko, Joseph
+reviewed_by = Ogili, Ugochukwu
 approved_by = Chima, Tasieobi
 
 # Logos can be local files in the project root or image URLs.
