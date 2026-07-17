@@ -394,13 +394,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   {% endfor %}
   {% if counterweight.enabled %}
   <div class="toc-entry">
-    <a href="#counterweight-check">Counterweight Stability Check (EQU — EN 1990)</a>
-  </div>
-  {% endif %}
-
-  {% if counterweight.enabled %}
-  <div class="toc-entry">
-    <a href="#app-e">Appendix E - Counterweight Design Calculation (A&#x2013;Z)</a>
+    <a href="#counterweight-check">Counterweight Stability Check</a>
   </div>
   {% endif %}
   <div class="toc-entry">
@@ -712,10 +706,6 @@ tr:nth-child(even) td { background: var(--bg-row); }
         ULS combinations use gamma = <strong>1.5</strong>; SLS (characteristic) combinations use gamma = <strong>1.0</strong>.<br/>
         <strong>DL</strong> = Dead Load &nbsp;|&nbsp; <strong>LL</strong> = Platform Live Load &nbsp;|&nbsp;
         <strong>HLX/HLZ</strong> = Handrail X/Z &nbsp;|&nbsp; <strong>WLX/WLZ</strong> = Wind X/Z
-        {% if counterweight.enabled %}&nbsp;|&nbsp;
-        <strong>CW</strong> = Counterweight (LC {{ counterweight.counterweight_load_case }}, LOADTYPE Dead;
-        &#947;<sub>stb</sub>&nbsp;=&nbsp;{{ counterweight.governing_cw_factor }} in ULS &nbsp;|&nbsp;
-        1.0 in SLS){% endif %}
       </td>
     </tr>
   </table>
@@ -743,130 +733,35 @@ tr:nth-child(even) td { background: var(--bg-row); }
    ========================================================== #}
 {% if counterweight.enabled %}
 <div class="page-calc" id="counterweight-check">
-<div class="section-hdr">COUNTERWEIGHT STABILITY CHECK — EQU LIMIT STATE (EN 1990)</div>
+<div class="section-hdr">COUNTERWEIGHT STABILITY CHECK</div>
 
-{% if counterweight.valid and not counterweight.errors %}
-<div class="callout" style="font-size:8.3pt; margin-bottom:5px;">
-  <strong>Basis:</strong> Cantilever analysis-line moment balance about the pivot line per EN 1990 EQU limit state.
-  Negative vertical support reactions from STAAD ULS combinations represent hold-down demand at backspan nodes.
-  ULS action factors (destabilising: 1.5, stabilising CW: {{ counterweight.governing_cw_factor }}) are already embedded in
-  the STAAD combinations; no additional multiplier is applied here.
-  {% if counterweight.adopted_counterweight_specified %}
-  The project-adopted counterweight is used for STAAD load distribution and final verification.
-  {% endif %}
-  <br/><br/>{{ counterweight.status_text }}
-  <br/><em style="font-size:7.8pt; color:var(--muted);">
-    Full design procedure is documented in <a href="#app-e">Appendix E</a>.
-  </em>
+{% if counterweight.valid and not counterweight.errors and counterweight.has_demand %}
+<div class="sub-hdr">Counterweight Load Calculation</div>
+<p style="font-size:8.5pt; margin:2px 0 8px;">
+  From STAAD.Pro analysis, the following values were obtained as force acting on the cantilever base.
+</p>
+
+{% for row in counterweight.analysis_line_rows %}
+<div class="sub-hdr" style="margin-top:10px;">Counter weight Analysis {{ row.label }}</div>
+{% for d in counterweight.diagrams %}{% if d.label == row.label %}{{ d.svg | safe }}{% endif %}{% endfor %}
+<div style="font-family:'Courier New',monospace; font-size:9pt; line-height:1.8; margin:0 0 8px 4px;">
+  {% for term in row.terms %}{{ term.uplift_kn }} x {{ term.arm_m }}{% if not loop.last %} + {% endif %}{% endfor %}<br/>
+  = {{ row.terms_sum_kn }} kN<br/>
+  CW = {{ row.terms_sum_kn }} / {{ counterweight.cw_lever_m }}<br/>
+  CW = <strong>{{ row.raw_cw_kn }} kN</strong>
 </div>
-{{ counterweight.diagram_svg }}
+{% endfor %}
 
-<div class="sub-hdr" style="margin-top:6px;">Summary Table</div>
-<table style="font-size:8.4pt; margin-bottom:6px;">
-  <thead>
-    <tr>
-      <th>Governing ULS Case</th>
-      <th>Pivot Line / CW Lever</th>
-      <th>Current CW in STAAD</th>
-      <th>CW Factor in Combo</th>
-      <th>Minimum Design CW</th>
-      <th style="background:var(--gold); color:var(--navy);">Target / Adopted CW</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>LC {{ counterweight.governing_load_case }}</strong><br>{{ counterweight.governing_title }}</td>
-      <td style="text-align:center;">Nodes {{ counterweight.pivot_nodes | join(', ') }}<br>{{ counterweight.cw_lever_m }} m</td>
-      <td style="text-align:center;">{{ counterweight.current_counterweight_kn }} kN<br>{{ counterweight.current_counterweight_tonnes }} t</td>
-      <td style="text-align:center;">{{ counterweight.governing_cw_factor }}</td>
-      <td style="text-align:center;">{{ counterweight.minimum_counterweight_kn }} kN<br>{{ counterweight.minimum_counterweight_tonnes }} t</td>
-      <td style="text-align:center; font-weight:bold; background:var(--bg-hdr);">
-        {{ counterweight.target_counterweight_kn }} kN<br>{{ counterweight.target_counterweight_tonnes }} t
-        {% if counterweight.adopted_counterweight_specified %}<br><span style="font-size:7.6pt;">adopted by project input</span>{% endif %}
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="sub-hdr">Analysis Line Breakdown</div>
-<table style="font-size:8.1pt; margin-bottom:6px;">
-  <thead>
-    <tr>
-      <th>Analysis Line</th>
-      <th>Governing LC</th>
-      <th>Critical Nodes</th>
-      <th>Design Hold-down Moment (kNm)</th>
-      <th>CW Factor in Combo</th>
-      <th>Required Design CW (kN)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in counterweight.analysis_line_rows %}
-    <tr>
-      <td style="text-align:center; font-weight:bold;">{{ row.line_label }}</td>
-      <td style="text-align:center;">LC {{ row.governing_load_case }}</td>
-      <td style="text-align:center;">{{ row.critical_nodes | join(', ') }}</td>
-      <td style="text-align:center;">{{ row.moment_knm }}</td>
-      <td style="text-align:center;">{{ row.cw_factor }}</td>
-      <td style="text-align:center; font-weight:bold;">{{ row.required_design_kn }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<div class="sub-hdr">Counterweight Zone &amp; Load Distribution</div>
-<table style="font-size:8.3pt; margin-bottom:6px;">
-  <thead>
-    <tr>
-      <th>Counterweight Zone</th>
-      <th>Zone Area (m&sup2;)</th>
-      <th>Target Pressure (kN/m&sup2;)</th>
-      <th>Selected Grid</th>
-      <th>Distributed Load (kN)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:center;">Nodes {{ counterweight.zone_nodes | join(', ') }}</td>
-      <td style="text-align:center;">{{ counterweight.zone_area_m2 }}</td>
-      <td style="text-align:center;">{{ counterweight.pressure_kn_m2 }}</td>
-      <td style="text-align:center;">{{ counterweight.distribution_axis }} direction ({{ counterweight.distributed_area_m2 }} m&sup2; tributary area)</td>
-      <td style="text-align:center; font-weight:bold;">{{ counterweight.total_distributed_kn }}</td>
-    </tr>
-  </tbody>
-</table>
-<table style="font-size:8.2pt; margin-bottom:5px;">
-  <thead>
-    <tr>
-      <th>Counterweight Supporting Members</th>
-      <th>Tributary Width (m)</th>
-      <th>Target Applied UDL (kN/m)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in counterweight.distribution_rows %}
-    <tr>
-      <td><strong>{{ row.member_display }}</strong> ({{ row.member_role }})</td>
-      <td style="text-align:center;">{{ row.tributary_width_display }}</td>
-      <td style="text-align:center; font-weight:bold;">{{ row.line_load_kn_m }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-{% if not counterweight.verified %}
-<div class="callout" style="font-size:8.0pt; margin-bottom:8px;">
-  {% if counterweight.needs_arrangement_revision %}
-  Applied counterweight satisfies the calculated moment-equilibrium demand, but STAAD still reports local ULS uplift
-  at node {{ counterweight.current_governing_node }} in LC {{ counterweight.current_governing_load_case }}
-  ({{ counterweight.current_min_fy_kn }} kN). Revise the counterweight location, load path, or support arrangement
-  before final issue.
-  {% else %}
-  This is a design-update result. Update STAAD LC {{ counterweight.counterweight_load_case }} member loads using the
-  recommended lines in the <a href="#references-standards">References &amp; Standards</a> section, re-run, and regenerate this report for final issue.
-  {% endif %}
+<div class="sub-hdr" style="margin-top:10px;">Summation</div>
+<div style="font-family:'Courier New',monospace; font-size:9pt; line-height:1.8; margin:0 0 8px 4px;">
+  Sum counter weight {{ counterweight.analysis_line_rows | map(attribute='label') | join(', ') }}
+  = {% for row in counterweight.analysis_line_rows %}{{ row.raw_cw_kn }} kN{% if not loop.last %} + {% endif %}{% endfor %}
+  = {{ counterweight.raw_sum_kn }} kN<br/><br/>
+  Use factor of safety of {{ counterweight.safety_factor }}<br/>
+  Total counterweight = {{ counterweight.raw_sum_kn }} kN x {{ counterweight.safety_factor }} = {{ counterweight.total_kn }} kN<br/><br/>
+  Use counterweight of <strong>{{ counterweight.minimum_counterweight_tonnes }} tonnes</strong>
+  ({{ counterweight.minimum_counterweight_kn }} kN).
 </div>
-{% endif %}
 
 {% elif counterweight.errors %}
 <div class="callout" style="font-size:8.3pt; margin-bottom:8px;">
@@ -1143,234 +1038,8 @@ tr:nth-child(even) td { background: var(--bg-row); }
 </div>
 
 
-
 {# ==============================================================
-   APPENDIX E - COUNTERWEIGHT DESIGN CALCULATION  (conditional)
-   ============================================================== #}
-{% if counterweight.enabled %}
-<div class="page-app appendix-page-start" id="app-e">
-<div class="app-label">APPENDIX E &#x2014; COUNTERWEIGHT DESIGN CALCULATION (A&#x2013;Z)</div>
-
-<div class="callout" style="font-size:8.3pt; margin-top:8px;">
-  <strong>Design approach:</strong> An initial counterweight estimate of 1&nbsp;kN/m&sup2; applied uniformly
-  over the counterweight zone was used for the first STAAD analysis run. This is the standard iterative
-  procedure — a non-trivial initial load is necessary to obtain meaningful support reactions, from which
-  the actual counterweight demand is then derived by moment equilibrium (see F.3). The member loads shown
-  in F.5 represent the final design values applied in the current STAAD model.
-</div>
-
-<div class="sub-hdr" style="margin-top:10px;">F.1 — Design Basis</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:6px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">EN 1990:2002 EQU</td>
-    <td style="border:none; line-height:1.75;">
-      The scaffold is a cantilever arrangement. Imposed loads on the overhang create an overturning moment
-      about the support edge. Stability is verified at the <strong>Equilibrium (EQU) limit state</strong>
-      per EN 1990:2002 — the appropriate limit state where loss of static equilibrium governs over material
-      failure. The EQU partial factors embedded in the STAAD ULS combinations are:<br/>
-      &bull; Destabilising permanent action (DL): <strong>&#947;<sub>dst</sub> = 1.5</strong><br/>
-      &bull; Destabilising variable action (LL, WL): <strong>&#947;<sub>dst</sub> = 1.5</strong><br/>
-      &bull; Stabilising permanent action (CW): <strong>&#947;<sub>stb</sub> = {{ counterweight.governing_cw_factor }}</strong><br/><br/>
-      The check is satisfied when the stabilising moment from the counterweight — at its reduced factored
-      value — equals or exceeds the overturning moment from all destabilising actions at their amplified
-      values. This is assessed through the STAAD ULS combination results.
-    </td>
-  </tr>
-</table>
-
-<div class="sub-hdr">F.2 — Geometry: Pivot Line, Counterweight Zone and Lever Arm</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:6px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">STAAD model geometry</td>
-    <td style="border:none; line-height:1.75;">
-      <strong>Pivot line:</strong> The row of base support nodes at the edge of the supporting structure
-      about which overturning is assessed — nodes
-      <strong>{{ counterweight.pivot_nodes | join(', ') }}</strong>, located at
-      {{ counterweight.pivot_axis | upper }}&nbsp;=&nbsp;<strong>{{ counterweight.pivot_normal_m }} m</strong>.<br/><br/>
-      <strong>Counterweight zone:</strong> The plan polygon on the backspan platform designated for
-      kentledge placement, bounded by nodes
-      <strong>{{ counterweight.zone_nodes | join(', ') }}</strong>
-      at elevation y&nbsp;=&nbsp;{{ counterweight.zone_elevation_m }}&nbsp;m.<br/>
-      Zone plan area:&nbsp; A<sub>CW</sub> = <strong>{{ counterweight.zone_area_m2 }} m&sup2;</strong><br/><br/>
-      <strong>Zone centroid</strong> (geometric centre of the polygon) at
-      {{ counterweight.pivot_axis | upper }}&nbsp;=&nbsp;{{ counterweight.cw_centroid_normal_m }}&nbsp;m.<br/><br/>
-      <strong>Lever arm</strong> (perpendicular distance from CW centroid to pivot line):<br/>
-      L<sub>CW</sub> = |{{ counterweight.cw_centroid_normal_m }}
-      &nbsp;&minus;&nbsp;{{ counterweight.pivot_normal_m }}|
-      = <strong>{{ counterweight.cw_lever_m }} m</strong>
-    </td>
-  </tr>
-</table>
-
-<div class="sub-hdr">F.3 — Overturning Moment and Minimum Required Counterweight</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:6px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">Moment balance method</td>
-    <td style="border:none; line-height:1.75;">
-      Vertical base support reactions (F<sub>Y</sub>) are read from the STAAD output for every ULS
-      combination across all base nodes. STAAD sign convention: positive F<sub>Y</sub> = upward push
-      from ground (compression); negative F<sub>Y</sub> = structure lifting off — a hold-down demand
-      at that node.<br/><br/>
-      For each ULS combination, every node showing negative F<sub>Y</sub> contributes to the overturning
-      moment about the pivot line:<br/>
-      M<sub>overturn</sub> = &#x03A3;&nbsp;(|F<sub>Y,i</sub>| &times; d<sub>i</sub>)<br/>
-      where d<sub>i</sub> is the perpendicular distance from node i to the pivot line (m).<br/><br/>
-      The minimum counterweight required to stabilise the moment at that analysis line:<br/>
-      CW<sub>min,line</sub> = M<sub>overturn</sub> &divide; (&#947;<sub>stb</sub> &times; L<sub>CW</sub>)<br/><br/>
-      This is evaluated at each distinct row of base nodes (analysis line) independently for every ULS
-      combination. The line-by-line CW<sub>min</sub> values within a given combination are summed to
-      obtain the total counterweight demand for that combination — each analysis line represents a
-      separate strip of the scaffold base, and summing across all strips gives the total counterweight
-      required to stabilise the structure as a whole. The combination producing the largest total demand
-      is the governing case; the minimum design counterweight equals that total. Results for the
-      governing combination are tabulated below.
-    </td>
-  </tr>
-</table>
-<table style="font-size:8.5pt; margin-bottom:6px;">
-  <thead>
-    <tr>
-      <th>Analysis Line</th>
-      <th>Governing LC</th>
-      <th>Critical Node(s)</th>
-      <th>&#x03A3; Overturning Moment, M (kNm)</th>
-      <th>&#947;<sub>stb</sub></th>
-      <th>CW<sub>min</sub> = M &divide; (&#947;<sub>stb</sub> &times; {{ counterweight.cw_lever_m }} m)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in counterweight.analysis_line_rows %}
-    <tr>
-      <td style="text-align:center; font-weight:bold;">{{ row.line_label }}</td>
-      <td style="text-align:center;">LC {{ row.governing_load_case }}</td>
-      <td style="text-align:center;">{{ row.critical_nodes | join(', ') }}</td>
-      <td style="text-align:center;">{{ row.moment_knm }}</td>
-      <td style="text-align:center;">{{ row.cw_factor }}</td>
-      <td style="text-align:center;">
-        {{ row.moment_knm }} &divide; ({{ row.cw_factor }} &times; {{ counterweight.cw_lever_m }})
-        = <strong>{{ row.required_design_kn }} kN</strong>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="5" style="text-align:right; font-weight:bold; background:var(--bg-hdr);">
-        Minimum Design Counterweight = &#x03A3; CW<sub>min</sub> across all lines (LC {{ counterweight.governing_load_case }}):
-      </td>
-      <td style="text-align:center; font-weight:bold; background:var(--bg-hdr);">
-        {{ counterweight.minimum_counterweight_kn }} kN &nbsp;({{ counterweight.minimum_counterweight_tonnes }} t)
-      </td>
-    </tr>
-  </tfoot>
-</table>
-
-<div class="sub-hdr">F.4 — Design Counterweight</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:6px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">Target value</td>
-    <td style="border:none; line-height:1.75;">
-    {% if counterweight.adopted_counterweight_specified %}
-      An adopted counterweight of <strong>{{ counterweight.adopted_counterweight_tonnes }} t</strong>
-      has been selected for this project:<br/>
-      CW<sub>adopted</sub> = {{ counterweight.adopted_counterweight_tonnes }} t
-      &times; 9.81 kN/t = <strong>{{ counterweight.adopted_counterweight_kn }} kN</strong><br/><br/>
-      Check:&nbsp; CW<sub>adopted</sub> = {{ counterweight.adopted_counterweight_kn }} kN
-      &nbsp;&ge;&nbsp; CW<sub>min</sub> = {{ counterweight.minimum_counterweight_kn }} kN
-      &nbsp;&#x2713;&nbsp; <strong>Counterweight is adequate.</strong><br/><br/>
-      The adopted value is used as the basis for STAAD load distribution.
-    {% else %}
-      The counterweight is sized at the calculated minimum:<br/>
-      CW<sub>design</sub> = CW<sub>min</sub>
-      = <strong>{{ counterweight.minimum_counterweight_kn }} kN
-      ({{ counterweight.minimum_counterweight_tonnes }} t)</strong><br/><br/>
-      This is the minimum kentledge mass required within the designated zone to satisfy EQU overturning
-      equilibrium across all ULS combinations. It is used as the basis for STAAD load distribution.
-    {% endif %}
-    </td>
-  </tr>
-</table>
-
-<div class="sub-hdr">F.5 — Distribution of Counterweight Load to STAAD Members</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:6px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">Load distribution</td>
-    <td style="border:none; line-height:1.75;">
-      The counterweight is represented in STAAD as UDL (kN/m) member loads on horizontal members within
-      the CW zone. The equivalent uniform pressure over the zone is first determined:<br/><br/>
-      q<sub>CW</sub> = CW<sub>design</sub> &divide; A<sub>CW</sub>
-      = {{ counterweight.target_counterweight_kn }} &divide; {{ counterweight.zone_area_m2 }}
-      = <strong>{{ counterweight.pressure_kn_m2 }} kN/m&sup2;</strong><br/><br/>
-      Each horizontal member carries load proportional to its tributary width
-      (edge members: half the adjacent bay width; interior members: sum of adjacent half-bays):<br/>
-      w = q<sub>CW</sub> &times; b<sub>tributary</sub>
-    </td>
-  </tr>
-</table>
-<table style="font-size:8.5pt; margin-bottom:6px;">
-  <thead>
-    <tr>
-      <th>Member(s)</th>
-      <th>Role</th>
-      <th>Tributary Width, b</th>
-      <th>w = {{ counterweight.pressure_kn_m2 }} &times; b &nbsp;(kN/m)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in counterweight.distribution_rows %}
-    <tr>
-      <td><strong>{{ row.member_display }}</strong></td>
-      <td style="text-align:center;">{{ row.member_role }}</td>
-      <td style="text-align:center;">{{ row.tributary_width_display }} m</td>
-      <td style="text-align:center; font-weight:bold;">
-        {{ counterweight.pressure_kn_m2 }} &times; {{ row.tributary_width_m }}
-        = <strong>{{ row.line_load_kn_m }} kN/m</strong>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="3" style="text-align:right; font-weight:bold; background:var(--bg-hdr);">Total applied to zone members:</td>
-      <td style="text-align:center; font-weight:bold; background:var(--bg-hdr);">{{ counterweight.total_distributed_kn }} kN</td>
-    </tr>
-  </tfoot>
-</table>
-<div class="callout" style="font-size:8.3pt;">
-  These UDL GY (downward) loads are applied in STAAD under LC {{ counterweight.counterweight_load_case }},
-  declared as <code>LOADTYPE Dead</code>. This classification causes the EQU stabilising factor of
-  {{ counterweight.governing_cw_factor }} to be applied automatically in the ULS combinations,
-  consistent with EN 1990 Table A1.2(A). Refer to the <a href="#references-standards">References &amp; Standards</a> section for the applicable
-  design standards.
-</div>
-
-<div class="sub-hdr" style="margin-top:8px;">F.6 — Residual Hold-down Demand at Backspan Base Nodes</div>
-<table style="border:none; font-size:8.8pt; margin-bottom:8px;">
-  <tr>
-    <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8pt; vertical-align:top; padding:2px 8px 2px 0;">EQU partial factor effect</td>
-    <td style="border:none; line-height:1.75;">
-      Under ULS EQU combinations, the destabilising factor (1.5) exceeds the stabilising CW factor
-      ({{ counterweight.governing_cw_factor }}). As a consequence, backspan base nodes close to the pivot
-      line may continue to register negative F<sub>Y</sub> in the STAAD output even with a correctly
-      sized counterweight in place. This is a mathematical consequence of the EQU factor distribution
-      — not an indication of counterweight inadequacy.<br/><br/>
-      The governing verification criterion is global moment equilibrium about the pivot line, demonstrated
-      in G.3 above. The maximum residual hold-down demand recorded at any single base node is
-      <strong>{{ counterweight.max_anchor_tension_kn }} kN</strong> at node
-      {{ counterweight.current_governing_node }}, LC&nbsp;{{ counterweight.current_governing_load_case }}
-      ({{ counterweight.current_governing_title }}). The counterweight provides the necessary global
-      stabilising moment; no structural anchorage of the scaffold base to the supporting surface is
-      required, provided the counterweight remains in position throughout the working life of the scaffold.
-    </td>
-  </tr>
-</table>
-
-</div>
-{% endif %}
-
-
-{# ==============================================================
-   APPENDIX F - REFERENCES & STANDARDS
+   REFERENCES & STANDARDS
    ============================================================== #}
 <div id="references-standards" style="margin-top:6mm; padding-top:4mm; border-top:2px solid var(--navy-dark); break-inside:avoid; page-break-inside:avoid;">
 <div class="section-hdr">REFERENCES &amp; STANDARDS</div>

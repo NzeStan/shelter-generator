@@ -1,9 +1,9 @@
 # Engineering sheet title block values.
 # Edit the values on the right side. Blank date uses today's date.
 
-drawing_number = PMS-WA-ARCO-080
+drawing_number = PMS-WA-ARCO-039
 project = 
-drawing_title = PMS-WA-ARCO-080
+drawing_title = PMS-WA-ARCO-039
 client = 
 location = 
 company = 

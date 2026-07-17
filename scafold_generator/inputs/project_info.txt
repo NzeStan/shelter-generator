@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-080
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-080
+DOCUMENT_NO:         PMS-WA-ARCO-039
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-039
 REVISION:            0
 
 # Integrated outputs
@@ -15,16 +15,18 @@ ENGINEERING_DRAWING_FORMAT:  standard
 SHOW_3D_ISOMETRIC_PAGE:      no
 
 # Counterweight (for no-tie cantilever stability checks)
-# Counterweight demand is calculated by ULS moment equilibrium about the pivot line.
-COUNTERWEIGHT_ENABLED:
+# Counterweight demand is calculated by ULS cantilever analysis-line moment balance about the
+# pivot line, then multiplied by COUNTERWEIGHT_SAFETY_FACTOR. Apply the resolved value directly
+# as Dead Load (DL) UDL member loads on the zone and rerun STAAD for final verification.
+COUNTERWEIGHT_ENABLED: yes
 COUNTERWEIGHT_ZONE_NODES: 41,53,54,46
-COUNTERWEIGHT_ADOPTED_TONNES:
 COUNTERWEIGHT_PIVOT_NODES:   23,38,24
+COUNTERWEIGHT_SAFETY_FACTOR: 4
 
 # Scaffold location and type
 LOCATION:            Jetty-1
 AREA:                B
-SCAFFOLD_TYPE:       Hanging
+SCAFFOLD_TYPE:       Cantilever
 RISK_LEVEL:          High
 
 # Load Intensity (SWL)
@@ -46,7 +48,7 @@ TIE_FORCE_FZ: 4.807
 TIE_FORCE_FY: 16.864
 
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/2714
+ERMT_NO:             PIC/PMS/26/2708
 
 # Personnel
 DESIGNED_BY_ID:      PMS/C3-1141
@@ -63,11 +65,11 @@ PREPARED_BY_NAME:
 
 
 # Job details
-EQUIPMENT_NAME: condensate loading arm
-EQUIPMENT_TAG: Z-3301A,Z-3301B,Z-3301C
-WORK_ORDER:
+EQUIPMENT_NAME: Fender
+EQUIPMENT_TAG: 
+WORK_ORDER:         
 PURPOSE:             maintenance
-STRUCTURE_ABOVE_GROUND_M:
+STRUCTURE_ABOVE_GROUND_M: 
 WIND_CALC_HEIGHT_M:
 DOC_LIFE:            3 Years
 

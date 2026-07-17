@@ -126,7 +126,7 @@ DEFAULTS = {
     'COUNTERWEIGHT_ENABLED': 'no',
     'COUNTERWEIGHT_ZONE_NODES': '',
     'COUNTERWEIGHT_PIVOT_NODES': '',
-    'COUNTERWEIGHT_ADOPTED_TONNES': '',
+    'COUNTERWEIGHT_SAFETY_FACTOR': '4',
 }
 
 REPORT_OUTLINE = [
@@ -831,37 +831,54 @@ def _counterweight_pivot_info(project, nodes, centroid):
     }, None
 
 
-def _counterweight_diagram_svg(counterweight):
-    cw_kn = counterweight.get('target_counterweight_kn', counterweight.get('minimum_counterweight_kn', 0.0))
-    cw_t = counterweight.get('target_counterweight_tonnes', counterweight.get('minimum_counterweight_tonnes', 0.0))
-    cw_label = 'Adopted CW' if counterweight.get('adopted_counterweight_specified') else 'Required CW'
-    lever = counterweight.get('cw_lever_m', 0.0)
-    cw_factor = counterweight.get('governing_cw_factor', 0.0)
-    pivot_nodes = ', '.join(str(node) for node in counterweight.get('pivot_nodes', []))
-    zone_nodes = ', '.join(str(node) for node in counterweight.get('zone_nodes', []))
-    governing = counterweight.get('governing_load_case', '')
-    axis_label = counterweight.get('normal_axis', 'X')
+def _analysis_line_label(index):
+    """Spreadsheet-style label: 0->A, 1->B, ..., 25->Z, 26->AA, 27->AB, ..."""
+    label = ''
+    index += 1
+    while index > 0:
+        index, remainder = divmod(index - 1, 26)
+        label = chr(65 + remainder) + label
+    return label
+
+
+def _counterweight_line_diagram_svg(row, lever):
+    """One labelled free-body sketch per analysis line, in the style of the reference
+    calculation: a CW block, a beam, the pivot, and the actual node reactions with their
+    distances marked directly on the sketch — no values baked into the CW block itself."""
+    terms = sorted(row.get('terms') or [], key=lambda t: -t['arm_m'])
+
+    beam_y = 130
+    cw_x = 130
+    pivot_x = 560
+    max_arm = max((t['arm_m'] for t in terms), default=lever) or lever or 1.0
+    span = pivot_x - cw_x - 50
+
+    arrows = []
+    for term in terms:
+        x = pivot_x - (term['arm_m'] / max_arm) * span
+        arrows.append(
+            f'<line x1="{x:.1f}" y1="{beam_y-40}" x2="{x:.1f}" y2="{beam_y}" stroke="#9b1c1c" '
+            f'stroke-width="2.5" marker-end="url(#cw-arrow)"></line>'
+            f'<text x="{x:.1f}" y="{beam_y-46}" text-anchor="middle" font-size="11" font-weight="700" '
+            f'fill="#9b1c1c">{term["uplift_kn"]:.3f} kN</text>'
+            f'<text x="{x:.1f}" y="{beam_y+32}" text-anchor="middle" font-size="9.5" fill="#0f2b46">'
+            f'{term["arm_m"]:.2f} m</text>'
+        )
+
     return f"""
-<svg viewBox="0 0 760 250" width="100%" height="205" role="img" aria-label="Counterweight stability diagram" style="border:1px solid #9bb8d6; background:#fff; margin-bottom:6px;">
+<svg viewBox="0 0 700 200" width="100%" height="170" role="img" aria-label="Counter weight Analysis {row.get('label','')} diagram" style="border:1px solid #9bb8d6; background:#fff; margin:4px 0 6px;">
   <defs>
     <marker id="cw-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L8,4 L0,8 z" fill="#0f2b46"></path>
     </marker>
   </defs>
-  <line x1="84" y1="128" x2="682" y2="128" stroke="#0f2b46" stroke-width="7" stroke-linecap="round"></line>
-  <rect x="132" y="60" width="92" height="66" fill="#5f8fc4" stroke="#0f2b46" stroke-width="3"></rect>
-  <text x="178" y="51" text-anchor="middle" font-size="18" font-weight="700" fill="#0f2b46">{cw_label}</text>
-  <line x1="178" y1="128" x2="178" y2="178" stroke="#0f2b46" stroke-width="2" marker-end="url(#cw-arrow)"></line>
-  <text x="178" y="202" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b46">{cw_kn:.3f} kN ({cw_t:.3f} t)</text>
-  <polygon points="486,128 458,178 514,178" fill="#fff" stroke="#0f2b46" stroke-width="3"></polygon>
-  <line x1="486" y1="42" x2="486" y2="207" stroke="#d49a00" stroke-width="3" stroke-dasharray="8 5"></line>
-  <text x="486" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#0f2b46">Pivot line</text>
-  <line x1="178" y1="218" x2="486" y2="218" stroke="#0f2b46" stroke-width="2" marker-start="url(#cw-arrow)" marker-end="url(#cw-arrow)"></line>
-  <text x="332" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b46">CW lever = {lever:.3f} m along {axis_label}</text>
-  <line x1="614" y1="70" x2="614" y2="128" stroke="#9b1c1c" stroke-width="3" marker-end="url(#cw-arrow)"></line>
-  <text x="614" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#9b1c1c">Overturning / uplift demand</text>
-  <text x="84" y="20" font-size="12" fill="#0f2b46">Counterweight zone nodes: {zone_nodes}</text>
-  <text x="84" y="38" font-size="12" fill="#0f2b46">Pivot nodes: {pivot_nodes}; governing ULS LC {governing}; CW factor in combo = {cw_factor:g}</text>
+  <line x1="70" y1="{beam_y}" x2="{pivot_x+60}" y2="{beam_y}" stroke="#0f2b46" stroke-width="6" stroke-linecap="round"></line>
+  <rect x="{cw_x-40}" y="{beam_y-64}" width="80" height="64" fill="#5f8fc4" stroke="#0f2b46" stroke-width="3"></rect>
+  <text x="{cw_x}" y="{beam_y-72}" text-anchor="middle" font-size="15" font-weight="700" fill="#0f2b46">CW</text>
+  <polygon points="{pivot_x:.0f},{beam_y} {pivot_x-14:.0f},{beam_y+26} {pivot_x+14:.0f},{beam_y+26}" fill="#fff" stroke="#0f2b46" stroke-width="3"></polygon>
+  {''.join(arrows)}
+  <line x1="{cw_x}" y1="{beam_y+52}" x2="{pivot_x:.0f}" y2="{beam_y+52}" stroke="#0f2b46" stroke-width="1.5" marker-start="url(#cw-arrow)" marker-end="url(#cw-arrow)"></line>
+  <text x="{(cw_x+pivot_x)/2:.0f}" y="{beam_y+68}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f2b46">{lever:.3f} m</text>
 </svg>
 """
 
@@ -870,15 +887,14 @@ def _counterweight_design(project, structural):
     result = {
         'enabled': _bool_setting(project.get('COUNTERWEIGHT_ENABLED'), False),
         'valid': False,
-        'verified': False,
-        'requires_counterweight': False,
+        'has_demand': False,
         'errors': [],
         'zone_nodes': [],
         'pivot_nodes': [],
         'analysis_line_rows': [],
         'distribution_rows': [],
         'recommended_staad_lines': [],
-        'diagram_svg': '',
+        'diagrams': [],
     }
     if not result['enabled']:
         return result
@@ -925,20 +941,7 @@ def _counterweight_design(project, structural):
         result['errors'].append('STAAD base support reactions are required before counterweight demand can be calculated.')
         return result
 
-    load_cases = structural.get('load_cases') or []
     load_combinations = structural.get('load_combinations') or []
-    counterweight_case = next(
-        (
-            case for case in load_cases
-            if re.search(r'\bCW\b|COUNTER\s*WEIGHT|COUNTERWEIGHT', str(case.get('title') or ''), re.IGNORECASE)
-        ),
-        None,
-    )
-    if not counterweight_case:
-        result['errors'].append('Add a separate primary load case titled CW, include it in the combinations, rerun STAAD, then regenerate the report.')
-        return result
-
-    counterweight_load_case = counterweight_case['number']
     base_by_load = {
         row['load_case']: {
             item['node']: float(item.get('fy', 0.0))
@@ -946,15 +949,10 @@ def _counterweight_design(project, structural):
         }
         for row in base_rows
     }
-    cw_reactions = base_by_load.get(counterweight_load_case) or {}
-    if not cw_reactions:
-        result['errors'].append(f'Support reactions for CW primary load case {counterweight_load_case} were not found.')
-        return result
 
-    current_counterweight_kn = sum(cw_reactions.values())
-    if current_counterweight_kn <= 0.001:
-        result['errors'].append(f'CW primary load case {counterweight_load_case} has no useful downward reaction at the base supports.')
-        return result
+    safety_factor = _float_project_setting(project.get('COUNTERWEIGHT_SAFETY_FACTOR'), 4.0)
+    if safety_factor <= 0.0:
+        safety_factor = 4.0
 
     normal_axis = pivot_info['normal_axis']
     pivot_axis = pivot_info['pivot_axis']
@@ -969,12 +967,6 @@ def _counterweight_design(project, structural):
         title = str(combo.get('title') or '')
         if 'ULS' not in title.upper():
             continue
-        cw_factor = next(
-            (float(factor) for number, factor in combo.get('factors', []) if int(number) == counterweight_load_case),
-            0.0,
-        )
-        if cw_factor <= 0.0:
-            continue
         combo_reactions = base_by_load.get(combo['number']) or {}
         if not combo_reactions:
             continue
@@ -983,18 +975,17 @@ def _counterweight_design(project, structural):
         for node in sorted(base_nodes):
             if node not in combo_reactions or node not in nodes:
                 continue
-            fy_with_cw = combo_reactions[node]
-            fy_without_cw = fy_with_cw - cw_factor * cw_reactions.get(node, 0.0)
-            if current_min is None or fy_with_cw < current_min:
-                current_min = fy_with_cw
+            fy = combo_reactions[node]
+            if current_min is None or fy < current_min:
+                current_min = fy
                 current_governing = {
                     'load_case': combo['number'],
                     'title': title,
                     'node': node,
-                    'fy_with_cw': fy_with_cw,
+                    'fy': fy,
                 }
 
-            uplift = max(0.0, -fy_without_cw)
+            uplift = max(0.0, -fy)
             if uplift <= 0.005:
                 continue
             normal_value = _counterweight_axis_value(nodes[node], normal_axis)
@@ -1006,134 +997,113 @@ def _counterweight_design(project, structural):
                 'axis_coordinate_m': line_coordinate,
                 'moment_knm': 0.0,
                 'nodes': [],
+                'terms': [],
             })
             line['moment_knm'] += uplift * moment_arm
             line['nodes'].append(node)
+            line['terms'].append({
+                'node': node,
+                'uplift_kn': uplift,
+                'arm_m': moment_arm,
+            })
 
         line_results = []
-        total_required = 0.0
         for line in line_map.values():
-            required_design = line['moment_knm'] / (cw_factor * cw_lever)
-            total_required += required_design
+            raw_cw = line['moment_knm'] / cw_lever
             line_result = {
                 'axis_coordinate_m': line['axis_coordinate_m'],
                 'line_label': f"{pivot_axis} = {_format_load_value(line['axis_coordinate_m'])} m",
                 'governing_load_case': combo['number'],
                 'governing_title': title,
                 'critical_nodes': sorted(set(line['nodes'])),
-                'moment_knm': line['moment_knm'],
-                'cw_factor': cw_factor,
-                'required_design_kn': required_design,
+                'terms': line['terms'],
+                'terms_sum_kn': line['moment_knm'],
+                'raw_cw_kn': raw_cw,
             }
             line_results.append(line_result)
             previous = line_peaks.get(line['axis_coordinate_m'])
-            if not previous or required_design > previous['required_design_kn']:
+            if not previous or raw_cw > previous['raw_cw_kn']:
                 line_peaks[line['axis_coordinate_m']] = line_result
 
         combo_summaries.append({
             'load_case': combo['number'],
             'title': title,
-            'total_required_design_kn': total_required,
             'line_results': line_results,
         })
 
     if not combo_summaries:
-        result['errors'].append('No ULS combinations containing CW were found for counterweight verification.')
+        result['errors'].append('No ULS combinations produced uplift at the base supports — counterweight demand could not be assessed.')
         return result
 
-    # The governing combination is the single ULS combination that simultaneously requires the
-    # most counterweight when ALL its tension nodes are considered together.
-    # Minimum CW must come from ONE combo, not by summing peaks from different combos.
-    governing_combo = max(combo_summaries, key=lambda item: item['total_required_design_kn'])
-    minimum_counterweight_kn = governing_combo['total_required_design_kn']
-    # Analysis lines shown in the report are the breakdown for the governing combo only,
-    # so the table rows sum exactly to minimum_counterweight_kn.
-    analysis_lines = sorted(governing_combo['line_results'], key=lambda row: row['axis_coordinate_m'])
-    if not analysis_lines or minimum_counterweight_kn <= 0.001:
-        result['message'] = 'No counterweight demand was found from ULS cantilever analysis-line moment balance.'
+    # One-shot envelope: for each analysis line, take its worst (peak) demand across ALL ULS
+    # combinations (every wind direction, not just whichever combo has the largest total), then
+    # sum those peaks. The counterweight's restoring effect (CW x lever) is purely geometric and
+    # applies equally regardless of load direction, so sizing to the worst case per line in a
+    # single pass covers every combination at once — matching the PDF's one-shot hand calculation
+    # instead of resolving one governing combo, rerunning, and finding another one behind it.
+    analysis_lines = sorted(line_peaks.values(), key=lambda row: row['axis_coordinate_m'])
+    raw_sum_kn = sum(row['raw_cw_kn'] for row in analysis_lines)
+
+    if not analysis_lines or raw_sum_kn <= 0.001:
+        result.update({
+            'valid': True,
+            'has_demand': False,
+            'message': 'No counterweight demand found — base reactions show no uplift under any ULS combination.',
+        })
         return result
 
-    governing_line = max(analysis_lines, key=lambda row: row['required_design_kn'])
+    total_kn = raw_sum_kn * safety_factor
 
-    adopted_tonnes = _float_project_setting(project.get('COUNTERWEIGHT_ADOPTED_TONNES'), 0.0)
-    adopted_counterweight_kn = adopted_tonnes * 9.81 if adopted_tonnes > 0.0 else 0.0
-    adopted_specified = adopted_counterweight_kn > 0.001
-    target_counterweight_kn = max(minimum_counterweight_kn, adopted_counterweight_kn) if adopted_specified else minimum_counterweight_kn
-    applied_cw_sufficient = current_counterweight_kn >= target_counterweight_kn * 0.995
-    # local_uplift_clear is NOT used for verification on cantilever structures.
-    # Under EQU combinations, destabilising loads are factored at 1.5 while stabilising CW
-    # is factored at 0.9, so individual backspan nodes will always show tension at ULS
-    # regardless of CW size — this is expected and is handled by anchor/tie-down design.
-    # Verification is based solely on global ULS moment equilibrium (applied_cw_sufficient).
-    local_uplift_clear = current_min is not None and current_min >= -0.005
-    verified = bool(applied_cw_sufficient)
+    # Round the total up to a practical kentledge figure (nearest 0.5 t), the way the PDF adopts a
+    # round practical tonnage rather than an odd decimal.
+    design_tonnes = math.ceil((total_kn / 9.81) * 2) / 2
+    design_kn = design_tonnes * 9.81
+
     distribution = _counterweight_grid_distribution(
         structural,
         polygon,
         result['zone_elevation_m'],
         area,
-        target_counterweight_kn,
+        design_kn,
     )
     if not distribution:
         result['errors'].append('No complete horizontal member grid was found within the counterweight zone for a reliable UDL proposal.')
         return result
 
+    labelled_lines = [
+        {
+            **row,
+            'label': _analysis_line_label(i),
+            'terms': [
+                {
+                    'node': term['node'],
+                    'uplift_kn': round(term['uplift_kn'], 3),
+                    'arm_m': round(term['arm_m'], 3),
+                }
+                for term in row['terms']
+            ],
+            'terms_sum_kn': round(row['terms_sum_kn'], 3),
+            'raw_cw_kn': round(row['raw_cw_kn'], 3),
+        }
+        for i, row in enumerate(analysis_lines)
+    ]
+
     max_anchor_tension_kn = abs(min(current_min or 0.0, 0.0))
-    if verified:
-        if max_anchor_tension_kn > 0.005:
-            current_status_text = (
-                f'Counterweight verified by ULS global moment equilibrium. '
-                f'Maximum ULS hold-down demand at backspan base node '
-                f'{current_governing["node"] if current_governing else "—"} = {max_anchor_tension_kn:.3f} kN '
-                f'(LC {current_governing["load_case"] if current_governing else "—"}). '
-                f'This is an EQU partial-factor artefact — the overall overturning is resisted by the counterweight moment; '
-                f'no base anchorage to the supporting structure is required provided the counterweight is maintained in position. '
-                f'Ensure counterweight is physically secured and in place before any live loading is applied.'
-            )
-        else:
-            current_status_text = (
-                'Counterweight verified by ULS global moment equilibrium. No hold-down demand at any base node detected. '
-                'Ensure counterweight is physically secured and in place before any live loading is applied.'
-            )
-    else:
-        if adopted_specified:
-            current_status_text = (
-                'Adopted counterweight has been specified for practical stability reserve; update LC CW member loads '
-                'with the adopted value and rerun STAAD for final ULS/SLS verification.'
-            )
-        else:
-            current_status_text = (
-                'Counterweight demand calculated by ULS moment equilibrium; update LC CW member loads and rerun STAAD for final verification.'
-            )
 
     result.update({
-        'verified': verified,
-        'requires_counterweight': not verified,
-        'needs_command_update': not applied_cw_sufficient,
-        'needs_arrangement_revision': False,
+        'has_demand': True,
+        'safety_factor': round(safety_factor, 3),
         'max_anchor_tension_kn': round(max_anchor_tension_kn, 3),
-        'status_text': current_status_text,
-        'governing_load_case': governing_combo['load_case'],
-        'governing_title': governing_combo['title'],
-        'governing_line_label': governing_line['line_label'],
-        'governing_line_nodes': governing_line['critical_nodes'],
         'current_governing_load_case': current_governing['load_case'] if current_governing else '',
         'current_governing_title': current_governing['title'] if current_governing else '',
         'current_governing_node': current_governing['node'] if current_governing else '',
         'current_min_fy_kn': round(current_min or 0.0, 3),
-        'required_design_kn': round(minimum_counterweight_kn, 3),
-        'governing_cw_factor': round(governing_line['cw_factor'], 3),
-        'current_counterweight_kn': round(current_counterweight_kn, 3),
-        'current_counterweight_tonnes': round(current_counterweight_kn / 9.81, 3),
-        'minimum_counterweight_kn': round(minimum_counterweight_kn, 3),
-        'minimum_counterweight_tonnes': round(minimum_counterweight_kn / 9.81, 3),
-        'adopted_counterweight_specified': adopted_specified,
-        'adopted_counterweight_kn': round(adopted_counterweight_kn, 3),
-        'adopted_counterweight_tonnes': round(adopted_counterweight_kn / 9.81, 3) if adopted_specified else 0.0,
-        'target_counterweight_kn': round(target_counterweight_kn, 3),
-        'target_counterweight_tonnes': round(target_counterweight_kn / 9.81, 3),
-        'pressure_kn_m2': round(target_counterweight_kn / area, 3),
-        'minimum_pressure_kn_m2': round(minimum_counterweight_kn / area, 3),
+        'raw_sum_kn': round(raw_sum_kn, 3),
+        'required_design_kn': round(total_kn, 3),
+        'total_kn': round(total_kn, 3),
+        'minimum_counterweight_kn': round(design_kn, 3),
+        'minimum_counterweight_tonnes': round(design_tonnes, 3),
+        'pressure_kn_m2': round(design_kn / area, 3),
         'cw_lever_m': round(cw_lever, 3),
         'pivot_nodes': pivot_info['pivot_nodes'],
         'pivot_axis': pivot_axis,
@@ -1142,22 +1112,12 @@ def _counterweight_design(project, structural):
         'pivot_start_m': round(pivot_info['pivot_start_m'], 3),
         'pivot_end_m': round(pivot_info['pivot_end_m'], 3),
         'cw_centroid_normal_m': round(pivot_info['cw_centroid_normal_m'], 3),
-        'analysis_line_rows': [
-            {
-                **row,
-                'moment_knm': round(row['moment_knm'], 3),
-                'cw_factor': round(row['cw_factor'], 3),
-                'required_design_kn': round(row['required_design_kn'], 3),
-            }
-            for row in analysis_lines
-        ],
+        'analysis_line_rows': labelled_lines,
         'distribution_axis': distribution['axis'],
         'distribution_rows': distribution['rows'],
         'distributed_area_m2': distribution['distributed_area_m2'],
         'total_distributed_kn': distribution['total_distributed_kn'],
-        'counterweight_load_case': counterweight_load_case,
         'recommended_staad_lines': [
-            f"LOAD {counterweight_load_case} LOADTYPE Dead TITLE CW",
             'MEMBER LOAD',
             *[
                 f"{' '.join(str(member) for member in row['member_ids'])} UNI GY -{row['line_load_kn_m']:.3f}"
@@ -1165,7 +1125,10 @@ def _counterweight_design(project, structural):
             ],
         ],
     })
-    result['diagram_svg'] = _counterweight_diagram_svg(result)
+    result['diagrams'] = [
+        {'label': row['label'], 'svg': _counterweight_line_diagram_svg(row, cw_lever)}
+        for row in labelled_lines
+    ]
     return result
 
 
@@ -2082,33 +2045,26 @@ def main():
     vertical_live_total = round(max((row.get('total_y', 0.0) for row in vertical_live_rows), default=0.0), 3)
     counterweight = _counterweight_design(project, structural)
     if counterweight.get('enabled'):
-        if counterweight.get('verified'):
-            print(
-                "  Counterweight: verified "
-                f"(min FY {counterweight['current_min_fy_kn']:.3f} kN, "
-                f"LC {counterweight['governing_load_case']})"
-            )
-        elif counterweight.get('requires_counterweight'):
-            if counterweight.get('needs_arrangement_revision'):
+        if counterweight.get('valid') and not counterweight.get('errors') and counterweight.get('has_demand'):
+            print(f"  Counterweight Load Calculation — {len(counterweight['analysis_line_rows'])} analysis line(s):")
+            for row in counterweight['analysis_line_rows']:
+                terms_str = ' + '.join(f"{t['uplift_kn']:.3f}x{t['arm_m']:.2f}" for t in row['terms'])
                 print(
-                    "  Counterweight: not verified; applied CW meets moment-equilibrium demand, "
-                    f"but local uplift remains at node {counterweight['current_governing_node']} "
-                    f"in LC {counterweight['current_governing_load_case']} "
-                    f"({counterweight['current_min_fy_kn']:.3f} kN)"
+                    f"    Analysis {row['label']} ({row['line_label']}, LC {row['governing_load_case']}): "
+                    f"{terms_str} = {row['terms_sum_kn']:.3f}"
                 )
-            else:
-                print(
-                    "  Counterweight: not verified; "
-                    f"{counterweight['minimum_counterweight_kn']:.3f} kN "
-                    f"({counterweight['minimum_counterweight_tonnes']:.3f} t) minimum; "
-                    f"{counterweight['target_counterweight_kn']:.3f} kN "
-                    f"({counterweight['target_counterweight_tonnes']:.3f} t) target "
-                    f"for LC {counterweight['governing_load_case']} on {counterweight['governing_line_label']}"
-                )
-            if counterweight.get('needs_command_update') and counterweight.get('recommended_staad_lines'):
-                print("  Counterweight member loads for next STAAD run:")
+                print(f"      CW = {row['terms_sum_kn']:.3f} / {counterweight['cw_lever_m']:.3f} = {row['raw_cw_kn']:.3f} kN")
+            line_sum = ' + '.join(f"{row['raw_cw_kn']:.3f}" for row in counterweight['analysis_line_rows'])
+            print(f"    Sum counter weight {', '.join(row['label'] for row in counterweight['analysis_line_rows'])} = {line_sum} = {counterweight['raw_sum_kn']:.3f} kN")
+            print(f"    Use factor of safety of {counterweight['safety_factor']:g}")
+            print(f"    Total counterweight = {counterweight['raw_sum_kn']:.3f} x {counterweight['safety_factor']:g} = {counterweight['total_kn']:.3f} kN")
+            print(f"    Use counterweight of {counterweight['minimum_counterweight_tonnes']:.3f} tonnes ({counterweight['minimum_counterweight_kn']:.3f} kN)")
+            if counterweight.get('recommended_staad_lines'):
+                print("  Resolved into member loads — add under the DL load case (LOAD 1) for the final rerun:")
                 for line in counterweight['recommended_staad_lines']:
                     print(f"    {line}")
+        elif counterweight.get('valid') and not counterweight.get('errors'):
+            print("  Counterweight: no demand found — base reactions show no uplift under any ULS combination.")
         elif counterweight.get('errors'):
             print("  [WARN] Counterweight: " + ' '.join(counterweight['errors']))
 
