@@ -848,7 +848,9 @@ tr:nth-child(even) td { background: var(--bg-row); }
     <td style="border:none; line-height:1.7;">
       The maximum axial load on scaffold tube members (from STAAD.Pro Connect Edition analysis) is
       <strong>{{ "%.3f"|format(max_axial) }} kN</strong>
-      {% if max_axial_member %}(Member {{ max_axial_member }}, {{ max_axial_type }}){% endif %}.
+      {% if max_axial_member %}(Member {{ max_axial_member }}, {{ max_axial_type }}){% endif %}
+      {% if connection_basis == 'SLS' %}under SLS (unfactored, &gamma;=1.0) — the ULS (&gamma;=1.5) axial load
+      exceeded Class B capacity, so the check falls back to the SLS basis{% else %}under ULS (&gamma;=1.5){% endif %}.
       The required right-angle coupler class is selected from Table C.1 below using the slipping resistance
       limit.<br/>
       Selected coupler class: <strong>{{ connection_class.class }}</strong>
@@ -887,7 +889,27 @@ tr:nth-child(even) td { background: var(--bg-row); }
 </table>
 
 {% if top_axial_members %}
-<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — ULS Code Check)</div>
+<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check)</div>
+{% if connection_basis == 'SLS' %}
+<table style="font-size:8pt; margin-bottom:6px;">
+  <thead>
+    <tr>
+      <th style="width:30%;">Member</th>
+      <th style="width:30%;">Type</th>
+      <th style="width:40%; background:var(--gold); color:var(--navy);">Axial Force (kN)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in top_axial_members %}
+    <tr>
+      <td style="text-align:center; font-weight:bold;">{{ m.member }}</td>
+      <td style="text-align:center;">{{ m.type or 'C' }}</td>
+      <td style="text-align:center; font-weight:bold; {% if m.axial == max_axial %}background:#D4EDDA;{% endif %}">{{ "%.3f"|format(m.axial) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
 <table style="font-size:8pt; margin-bottom:6px;">
   <thead>
     <tr>
@@ -914,6 +936,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     {% endfor %}
   </tbody>
 </table>
+{% endif %}
 {% endif %}
 
 {% if show_frictional_resistance %}

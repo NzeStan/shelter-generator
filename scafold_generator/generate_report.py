@@ -375,7 +375,11 @@ def _live_member_geometry(member_id, structural):
     return {
         "axis": axis,
         "y_mid": round((p1[1] + p2[1]) / 2.0, 3),
-        "perp_coord": round((p1[perp_idx] + p2[perp_idx]) / 2.0, 3),
+        # Rounded to 1cm (not 1mm) so members meant to sit at the same design position
+        # collapse into the same bucket even when STAAD node coordinates carry sub-mm
+        # noise (e.g. 4.00001 instead of 4.0) — avoids splitting one Edge/Interior role
+        # into several near-identical tributary-width rows purely from float noise.
+        "perp_coord": round((p1[perp_idx] + p2[perp_idx]) / 2.0, 2),
     }
 
 
@@ -399,23 +403,27 @@ def _assign_tributary_widths(member_entries):
 
         idx = coords.index(geom["perp_coord"])
         if idx == 0:
-            bay = coords[1] - coords[0]
-            tw = bay / 2.0
+            # Round the bay itself first so two edges that display as the same bay width
+            # (e.g. both "1.667") always halve to the same tributary width — otherwise
+            # sub-millimetre noise in the underlying node coordinates (STAAD geometry is
+            # rarely exact) can round the half up at one edge and down at the other.
+            bay = round(coords[1] - coords[0], 3)
+            tw = round(bay / 2.0, 3)
             entry["member_role"] = "Edge"
-            entry["tributary_width_m"] = round(tw, 3)
+            entry["tributary_width_m"] = tw
             entry["tributary_width_display"] = f"{_fmt_width(bay)} / 2 = {_fmt_width(tw)}"
         elif idx == len(coords) - 1:
-            bay = coords[-1] - coords[-2]
-            tw = bay / 2.0
+            bay = round(coords[-1] - coords[-2], 3)
+            tw = round(bay / 2.0, 3)
             entry["member_role"] = "Edge"
-            entry["tributary_width_m"] = round(tw, 3)
+            entry["tributary_width_m"] = tw
             entry["tributary_width_display"] = f"{_fmt_width(bay)} / 2 = {_fmt_width(tw)}"
         else:
-            left_half = (coords[idx] - coords[idx - 1]) / 2.0
-            right_half = (coords[idx + 1] - coords[idx]) / 2.0
-            tw = left_half + right_half
+            left_half = round((coords[idx] - coords[idx - 1]) / 2.0, 3)
+            right_half = round((coords[idx + 1] - coords[idx]) / 2.0, 3)
+            tw = round(left_half + right_half, 3)
             entry["member_role"] = "Interior"
-            entry["tributary_width_m"] = round(tw, 3)
+            entry["tributary_width_m"] = tw
             entry["tributary_width_display"] = (
                 f"({_fmt_width(left_half)} + {_fmt_width(right_half)}) = {_fmt_width(tw)}"
             )
@@ -475,13 +483,25 @@ def _platform_live_workings(project, structural):
                 tw_display = inferred_tw_display
 
         intensity = project_intensity or (line_load / tributary_width if tributary_width else line_load)
+        matched_class = _load_class_for_intensity(intensity)
+        if matched_class:
+            # Snap to the exact BS EN 12811-1 class intensity instead of displaying a noisy
+            # back-calculated value (e.g. 1.499/1.501 instead of 1.5) for what is a single
+            # design intensity, and let members sharing a role collapse into one table row
+            # instead of one row per member.
+            intensity = LOAD_CLASS_INTENSITIES[matched_class]
+            if tributary_width:
+                line_load = round(intensity * tributary_width, 3)
         role = entry.get("member_role") or "Loaded"
         key = (
             y_mid,
             entry.get("load_case"),
             entry.get("title") or "LL",
             role,
-            tw_display,
+            # Numeric width, not the display string — "0.830 + 0.835" and "0.835 + 0.830"
+            # are the same tributary width and must collapse into one row, even though
+            # the breakdown text differs depending on which side of the member is wider.
+            round(float(tributary_width), 3) if tributary_width else None,
             round(float(intensity), 3),
             round(float(line_load), 3),
         )
@@ -2177,6 +2197,13 @@ def main():
         auto_axial_member = cc['max_axial_member']
         auto_axial_type   = cc['max_axial_type']
 
+    # Check ULS first; if the coupler class fails under ULS, fall back to SLS (unfactored,
+    # gamma=1.0 — see Load Combinations legend). SLS force = ULS force / 1.5, since every
+    # ULS combo here is the same SLS combo at 1.5x (the load combination generator always
+    # pairs "SLS DL+LL" with "ULS 1.5DL+1.5LL" etc.), so this is an exact unfactoring, not
+    # an approximation. This is a fallback verification basis, not a substitute UC check —
+    # the Status/Clause/UC Ratio columns are ULS-specific and are not shown for the SLS view.
+    connection_basis = 'ULS'
     max_axial        = auto_axial
     max_axial_member = str(auto_axial_member or '')
     max_axial_type   = auto_axial_type
@@ -2185,6 +2212,15 @@ def main():
     # Top 30 horizontal members by axial force for the connection check table
     top_axial_members = sorted(horiz_members if horiz_members else cc.get('members', []),
                                key=lambda m: m['axial'], reverse=True)[:30]
+
+    if connection_class['status'] == 'FAIL':
+        connection_basis = 'SLS'
+        max_axial = round(auto_axial / 1.5, 3)
+        connection_class = _connection_class(max_axial)
+        top_axial_members = [
+            {**m, 'axial': round(m['axial'] / 1.5, 3)}
+            for m in top_axial_members
+        ]
 
     # -- Deflection values (auto from .out file; project_info keys are optional overrides) --
     max_vert_mm   = _float(project.get('MAX_VERT_DISP_MM'),  d['max_vertical_mm'])
@@ -2235,6 +2271,7 @@ def main():
         max_axial_member = max_axial_member,
         max_axial_type   = max_axial_type,
         connection_class  = connection_class,
+        connection_basis  = connection_basis,
         top_axial_members = top_axial_members,
         max_vert_mm      = max_vert_mm,
         max_vert_lc      = max_vert_lc,

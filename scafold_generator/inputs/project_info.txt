@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-039
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-039
+DOCUMENT_NO:         PMS-WA-ARCO-047
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-047
 REVISION:            0
 
 # Integrated outputs
@@ -18,15 +18,15 @@ SHOW_3D_ISOMETRIC_PAGE:      no
 # Counterweight demand is calculated by ULS cantilever analysis-line moment balance about the
 # pivot line, then multiplied by COUNTERWEIGHT_SAFETY_FACTOR. Apply the resolved value directly
 # as Dead Load (DL) UDL member loads on the zone and rerun STAAD for final verification.
-COUNTERWEIGHT_ENABLED: yes
+COUNTERWEIGHT_ENABLED: no
 COUNTERWEIGHT_ZONE_NODES: 41,53,54,46
 COUNTERWEIGHT_PIVOT_NODES:   23,38,24
 COUNTERWEIGHT_SAFETY_FACTOR: 4
 
 # Scaffold location and type
-LOCATION:            Jetty-1
-AREA:                B
-SCAFFOLD_TYPE:       Cantilever
+LOCATION:            Train 2
+AREA:                D
+SCAFFOLD_TYPE:       Hanging
 RISK_LEVEL:          High
 
 # Load Intensity (SWL)
@@ -49,7 +49,7 @@ TIE_FORCE_FZ:
 TIE_FORCE_FY:
 
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/2708
+ERMT_NO:             PIC/PMS/26/
 
 # Personnel
 DESIGNED_BY_ID:      PMS/C3-1141
@@ -66,21 +66,21 @@ PREPARED_BY_NAME:
 
 
 # Job details
-EQUIPMENT_NAME: Fender
-EQUIPMENT_TAG: 
-WORK_ORDER:         
+EQUIPMENT_NAME: 
+EQUIPMENT_TAG:      TR2_12-SDS_2IN-2P12001-1-61174M
+WORK_ORDER:         4030634
 PURPOSE:             maintenance
-STRUCTURE_ABOVE_GROUND_M: 
+STRUCTURE_ABOVE_GROUND_M: 13
 WIND_CALC_HEIGHT_M:
 DOC_LIFE:            3 Years
 
 # Deflection Check — auto-extracted from .out file SLS combination results.
 # Override only if auto-extraction fails:
-MAX_VERT_DISP_MM:0.349
-MAX_VERT_DISP_LC:15
-MAX_HORIZ_DISP_MM:4.577
-MAX_HORIZ_DISP_LC:14
+MAX_VERT_DISP_MM:2.033
+MAX_VERT_DISP_LC:8
+MAX_HORIZ_DISP_MM:0.548
+MAX_HORIZ_DISP_LC:8
 # Member ID whose length defines the span L for deflection limits (optional).
 # If blank, the member connected to the critical-displacement node is used automatically.
-MAX_VERT_MEMBER:555
-MAX_HORIZ_MEMBER:426
+MAX_VERT_MEMBER:169
+MAX_HORIZ_MEMBER:24
