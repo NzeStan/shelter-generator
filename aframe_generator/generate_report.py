@@ -99,6 +99,10 @@ DEFAULTS = {
     'RISK_LEVEL':        'Medium',       # High / Medium / Low
     'PERMIT_NO':         '',
     'ERMT_NO':           '',
+    # Optional cover-page callouts — shown once under Brief Description (after the tie
+    # display if the project has ties). Leave blank to omit entirely.
+    'NOTE':              '',
+    'WARNING':           '',
     'DESIGNED_BY_ID':    '',
     'DESIGNED_BY_NAME':  '',
     'VERIFIED_BY_ID':    '',
@@ -172,6 +176,23 @@ def _format_number(value):
     if value is None:
         return ''
     return f"{float(value):g}"
+
+
+def _cover_callout_font_pt(*texts):
+    """Font size (pt) for the cover-page NOTE/WARNING callouts, scaled down by combined
+    text length. Computed server-side (not via browser JS) since the cover page's fixed
+    height must never push content onto page 2 regardless of which PDF engine renders it —
+    a print-time reflow can wrap text differently than an on-screen measurement would."""
+    total_chars = sum(len(t or '') for t in texts)
+    if total_chars <= 150:
+        return 8.5
+    if total_chars <= 300:
+        return 7.5
+    if total_chars <= 500:
+        return 6.8
+    if total_chars <= 800:
+        return 6.2
+    return 6.0
 
 
 # -- Logo / image loading ------------------------------------------------------
@@ -978,6 +999,12 @@ def main():
         auto_axial_member = cc['max_axial_member']
         auto_axial_type   = cc['max_axial_type']
 
+    # Check ULS first; if the coupler class fails under ULS, fall back to SLS (unfactored,
+    # gamma=1.0 — see Load Combinations legend). SLS force = ULS force / 1.5, since every
+    # ULS combo here is the same SLS combo at 1.5x, so this is an exact unfactoring, not an
+    # approximation. The Status/Clause/UC Ratio columns are ULS-specific and are not shown
+    # for the SLS view.
+    connection_basis = 'ULS'
     max_axial        = auto_axial
     max_axial_member = str(auto_axial_member or '')
     max_axial_type   = auto_axial_type
@@ -986,6 +1013,15 @@ def main():
     # Top 30 horizontal members by axial force for the connection check table
     top_axial_members = sorted(horiz_members if horiz_members else cc.get('members', []),
                                key=lambda m: m['axial'], reverse=True)[:30]
+
+    if connection_class['status'] == 'FAIL':
+        connection_basis = 'SLS'
+        max_axial = round(auto_axial / 1.5, 3)
+        connection_class = _connection_class(max_axial)
+        top_axial_members = [
+            {**m, 'axial': round(m['axial'] / 1.5, 3)}
+            for m in top_axial_members
+        ]
 
     # -- Deflection values (auto from .out file; project_info keys are optional overrides) --
     def _float(val, fallback):
@@ -1008,6 +1044,8 @@ def main():
         'abs':   abs,
     })
 
+    cover_callout_font_pt = _cover_callout_font_pt(project.get('NOTE'), project.get('WARNING'))
+
     template = env.get_template('report.html')
     html = template.render(
         project       = project,
@@ -1020,6 +1058,7 @@ def main():
         horiz_allow   = horiz_allow,
         total_horiz_x = total_horiz_x,
         total_horiz_z = total_horiz_z,
+        cover_callout_font_pt = cover_callout_font_pt,
         has_ties = has_ties,
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,
@@ -1033,6 +1072,7 @@ def main():
         max_axial_member = max_axial_member,
         max_axial_type   = max_axial_type,
         connection_class  = connection_class,
+        connection_basis  = connection_basis,
         top_axial_members = top_axial_members,
         max_vert_mm      = max_vert_mm,
         max_vert_lc      = max_vert_lc,

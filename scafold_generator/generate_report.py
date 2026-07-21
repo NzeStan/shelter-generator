@@ -103,6 +103,10 @@ DEFAULTS = {
     'RISK_LEVEL':        'Medium',       # High / Medium / Low
     'PERMIT_NO':         '',
     'ERMT_NO':           '',
+    # Optional cover-page callouts — shown once under Brief Description (after the tie
+    # display if the project has ties). Leave blank to omit entirely.
+    'NOTE':              '',
+    'WARNING':           '',
     'DESIGNED_BY_ID':    '',
     'DESIGNED_BY_NAME':  '',
     'VERIFIED_BY_ID':    '',
@@ -177,6 +181,23 @@ def _format_number(value):
     if value is None:
         return ''
     return f"{float(value):g}"
+
+
+def _cover_callout_font_pt(*texts):
+    """Font size (pt) for the cover-page NOTE/WARNING callouts, scaled down by combined
+    text length. Computed server-side (not via browser JS) since the cover page's fixed
+    height must never push content onto page 2 regardless of which PDF engine renders it —
+    a print-time reflow can wrap text differently than an on-screen measurement would."""
+    total_chars = sum(len(t or '') for t in texts)
+    if total_chars <= 150:
+        return 8.5
+    if total_chars <= 300:
+        return 7.5
+    if total_chars <= 500:
+        return 6.8
+    if total_chars <= 800:
+        return 6.2
+    return 6.0
 
 
 # -- Logo / image loading ------------------------------------------------------
@@ -2238,6 +2259,8 @@ def main():
         'abs':   abs,
     })
 
+    cover_callout_font_pt = _cover_callout_font_pt(project.get('NOTE'), project.get('WARNING'))
+
     template = env.get_template('report.html')
     html = template.render(
         project       = project,
@@ -2250,6 +2273,7 @@ def main():
         horiz_allow   = horiz_allow,
         total_horiz_x = total_horiz_x,
         total_horiz_z = total_horiz_z,
+        cover_callout_font_pt = cover_callout_font_pt,
         vertical_live_total = vertical_live_total,
         counterweight = counterweight,
         net_global_reaction_summary = net_global_reaction_summary,

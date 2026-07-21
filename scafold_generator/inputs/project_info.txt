@@ -44,20 +44,25 @@ TIE_DISPLAY:         sum
 # Manual override for cover page tie forces (kN). Leave blank to use auto-calculated values.
 # TIE_FORCE_FY applies to Hanging scaffolds only (vertical reaction at suspension points).
 # Not applicable to this project (Cantilever, counterweight-stabilised, no ties) — left blank.
-TIE_FORCE_FX:
-TIE_FORCE_FZ:
-TIE_FORCE_FY:
+TIE_FORCE_FX:6.950
+TIE_FORCE_FZ:11.947
+TIE_FORCE_FY:27.309
 
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/
+ERMT_NO:             PIC/PMS/26/2971
+
+# Optional cover-page callouts, shown once under Brief Description (after the tie display
+# if this project has ties). Leave blank to omit entirely.
+NOTE:
+WARNING:
 
 # Personnel
 DESIGNED_BY_ID:      PMS/C3-1141
 DESIGNED_BY_NAME:    Nnamani, Ifeanyi
 VERIFIED_BY_ID:      PMS/612C
 VERIFIED_BY_NAME:    Olowo, Peter
-REVIEWED_BY_ID:      PIC/32C
-REVIEWED_BY_NAME:    Ogili, Ugochukwu
+REVIEWED_BY_ID:      PIC/33C
+REVIEWED_BY_NAME:    Ezewoko, Joseph
 APPROVED_BY_ID:      PIC/2
 APPROVED_BY_NAME:    Chima, Tasieobi
 CHECKED_BY_ID:       PMS/6
@@ -71,7 +76,7 @@ EQUIPMENT_TAG:      TR2_12-SDS_2IN-2P12001-1-61174M
 WORK_ORDER:         4030634
 PURPOSE:             maintenance
 STRUCTURE_ABOVE_GROUND_M: 13
-WIND_CALC_HEIGHT_M:
+WIND_CALC_HEIGHT_M: 15
 DOC_LIFE:            3 Years
 
 # Deflection Check — auto-extracted from .out file SLS combination results.

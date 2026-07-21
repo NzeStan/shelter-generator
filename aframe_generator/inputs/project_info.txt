@@ -21,6 +21,11 @@ RISK_LEVEL:          Medium
 PERMIT_NO:
 ERMT_NO:             PIC/PMS/26/2413
 
+# Optional cover-page callouts, shown once under Brief Description (after the tie display
+# if this project has ties). Leave blank to omit entirely.
+NOTE:
+WARNING:
+
 # Personnel
 DESIGNED_BY_ID:      PMS/C3-1141
 DESIGNED_BY_NAME:    Nnamani, Ifeanyi
