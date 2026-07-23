@@ -2068,6 +2068,7 @@ def main():
     show_frictional_resistance = not _is_hanging_scaffold(project.get('SCAFFOLD_TYPE'))
     has_handrail = bool(hl.get('has_x') or hl.get('has_z'))
     has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
+    has_wind = bool(wl.get('has_wind'))
     show_tie_reactions = _bool_setting(project.get('SHOW_TIE_REACTIONS'), False)
 
     # Cover page tie force display — sum (default) or worst single node
@@ -2279,6 +2280,7 @@ def main():
         net_global_reaction_summary = net_global_reaction_summary,
         has_handrail = has_handrail,
         has_ties = has_ties,
+        has_wind = has_wind,
         show_assurance_note = show_assurance_note,
         show_frictional_resistance = show_frictional_resistance,
         show_tie_reactions = show_tie_reactions,

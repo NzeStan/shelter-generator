@@ -723,7 +723,7 @@ class StaadParser:
         all_sums = all_sums or self._parse_load_summation_totals(out)
 
         # Step 2: match wind load cases to their summation values
-        result = {'total_x': 0.0, 'total_z': 0.0}
+        result = {'total_x': 0.0, 'total_z': 0.0, 'has_wind': bool(wind_lcs)}
 
         for lc, axis in wind_lcs.items():
             if lc not in all_sums:

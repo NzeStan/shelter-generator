@@ -949,6 +949,7 @@ def main():
     # A-frame is actually tied to a parent structure. A-frame is never a hanging type,
     # so there is no FY / suspension-tie concept here.
     has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
+    has_wind = bool(wl.get('has_wind'))
     show_tie_reactions = _bool_setting(project.get('SHOW_TIE_REACTIONS'), False)
 
     sr = structural.get('support_reactions', {})
@@ -1060,6 +1061,7 @@ def main():
         total_horiz_z = total_horiz_z,
         cover_callout_font_pt = cover_callout_font_pt,
         has_ties = has_ties,
+        has_wind = has_wind,
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,
         tie_sum_fz        = tie_sum_fz,

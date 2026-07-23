@@ -400,7 +400,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     ('load-summary',       'Reaction on Parent Structure (Ties)') if (show_tie_reactions and structural.support_reactions.tie_joints) else ('', ''),
     ('general-note',       'General Note, Material Properties &amp; Modelling Philosophy'),
     ('load-cases',         'Load Cases'),
-    ('wind-calc',          'Wind Load Calculation (EN 1991-1-4:2005)'),
+    ('wind-calc',          'Wind Load Calculation (EN 1991-1-4:2005)') if has_wind else ('', ''),
     ('load-combs',         'Load Combinations'),
     ('uc-summary',         'Static Check - Utilization Ratio Summary'),
     ('connection-check',   'Scaffold Tubes Connection Stability Check'),
@@ -617,6 +617,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 
 {% endif %}
 
+{% if has_wind %}
 <div class="sub-hdr" style="margin-top:8px;">Wind Load</div>
 <table style="border:none; margin:4px 0;">
   <tr>
@@ -632,6 +633,12 @@ tr:nth-child(even) td { background: var(--bg-row); }
   Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong><br/>
   Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong>
 </div>
+{% else %}
+<div class="callout" style="font-size:8.5pt;">
+  This scaffold is erected indoors — wind actions per EN 1991-1-4:2005 are not applicable and have not
+  been considered in this design.
+</div>
+{% endif %}
 
 {# -- Load Diagrams inline -- #}
 <div class="sub-hdr" style="margin-top:8mm;">Load Diagrams</div>
@@ -655,6 +662,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     <div style="font-size:7.5pt; text-align:center; color:var(--muted); margin-top:2px;">Handrail Load Z (HLZ)</div>
   </div>
   {% endif %}
+  {% if has_wind %}
   <div style="flex:1; min-width:140px;">
     {% if images['load_wind_x'] %}<img src="{{ images['load_wind_x'] }}" class="app-img" style="max-height:180px;"/>
     {% else %}<div class="img-box" style="min-height:140px;"><strong>Wind Load X</strong><small>load_wind_x.png</small></div>{% endif %}
@@ -665,6 +673,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
     {% else %}<div class="img-box" style="min-height:140px;"><strong>Wind Load Z</strong><small>load_wind_z.png</small></div>{% endif %}
     <div style="font-size:7.5pt; text-align:center; color:var(--muted); margin-top:2px;">Wind Load Z (WLZ)</div>
   </div>
+  {% endif %}
   {% if counterweight.enabled %}
   <div style="flex:1; min-width:140px;">
     {% if images['load_counterweight'] %}<img src="{{ images['load_counterweight'] }}" class="app-img" style="max-height:180px;"/>
@@ -677,8 +686,9 @@ tr:nth-child(even) td { background: var(--bg-row); }
 
 
 {# ==========================================================
-   SHEET 3 - WIND LOAD CALCULATION
+   SHEET 3 - WIND LOAD CALCULATION  (only if the STAAD model has wind load cases)
    ========================================================== #}
+{% if has_wind %}
 <div class="page-calc" id="wind-calc">
 <div class="section-hdr">WIND LOAD CALCULATION - EN 1991-1-4:2005</div>
 <table style="font-size:8.5pt;">
@@ -719,6 +729,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   </tbody>
 </table>
 </div>
+{% endif %}
 
 
 {# ==========================================================
@@ -734,7 +745,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
         Load combinations in accordance with BS EN 12811-1:2003.
         ULS combinations use gamma = <strong>1.5</strong>; SLS (characteristic) combinations use gamma = <strong>1.0</strong>.<br/>
         <strong>DL</strong> = Dead Load &nbsp;|&nbsp; <strong>LL</strong> = Platform Live Load &nbsp;|&nbsp;
-        <strong>HLX/HLZ</strong> = Handrail X/Z &nbsp;|&nbsp; <strong>WLX/WLZ</strong> = Wind X/Z
+        <strong>HLX/HLZ</strong> = Handrail X/Z{% if has_wind %} &nbsp;|&nbsp; <strong>WLX/WLZ</strong> = Wind X/Z{% endif %}
       </td>
     </tr>
   </table>
@@ -1109,10 +1120,10 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <tbody>
     <tr><td>BS EN 12811-1:2003</td><td>Temporary Works Equipment - Scaffolds - Performance Requirements and General Design</td><td style="text-align:center;">2003</td></tr>
     <tr><td>BS EN 1993-1-1:2005</td><td>Eurocode 3: Design of Steel Structures - General Rules and Rules for Buildings</td><td style="text-align:center;">2005</td></tr>
-    <tr><td>BS EN 1991-1-4:2005</td><td>Eurocode 1: Actions on Structures - Wind Actions</td><td style="text-align:center;">2005</td></tr>
+    {% if has_wind %}<tr><td>BS EN 1991-1-4:2005</td><td>Eurocode 1: Actions on Structures - Wind Actions</td><td style="text-align:center;">2005</td></tr>{% endif %}
     <tr><td>BS EN 1990:2002</td><td>Eurocode: Basis of Structural Design — Load Combinations, Partial Factors, and Limit States (ULS/SLS/EQU)</td><td style="text-align:center;">2002</td></tr>
     <tr><td>NASC TG20:13</td><td>Guide to Good Practice for Scaffolding with Tubes and Fittings</td><td style="text-align:center;">2013</td></tr>
-    <tr><td>Durst, C.S.</td><td>Wind Speeds Over Short Periods of Time. The Meteorological Magazine, 89, 181–186 — basis of 3-second gust to 10-minute mean conversion</td><td style="text-align:center;">1960</td></tr>
+    {% if has_wind %}<tr><td>Durst, C.S.</td><td>Wind Speeds Over Short Periods of Time. The Meteorological Magazine, 89, 181–186 — basis of 3-second gust to 10-minute mean conversion</td><td style="text-align:center;">1960</td></tr>{% endif %}
     <tr><td>STAAD.Pro CONNECT</td><td>STAAD.Pro CONNECT Edition V22 - Structural Analysis and Design Software</td><td style="text-align:center;">2022</td></tr>
   </tbody>
 </table>
