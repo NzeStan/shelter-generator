@@ -120,6 +120,11 @@ tr:nth-child(even) td { background: var(--bg-row); }
 .toc-subentry { padding-left: 14px; font-size: 9pt; }
 .toc-section { font-weight: bold; color: var(--navy); margin-top: 8px; font-size: 10pt; }
 
+/* STAAD output source tag */
+.src-tag { font-size: 6.5pt; font-style: italic; font-weight: normal; color: var(--muted);
+           margin-left: 4px; white-space: nowrap; }
+th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
+
 /* Cover approval table */
 .signature-table { table-layout: fixed; }
 .signature-table th,
@@ -149,8 +154,12 @@ tr:nth-child(even) td { background: var(--bg-row); }
     </td>
   </tr>
   <tr>
+    {% if has_scaffold_type %}
     <td style="background:var(--bg-hdr); font-weight:bold; font-size:8pt; border-bottom:1px solid var(--border); padding:3px 6px;">Scaffold Type:</td>
     <td style="border-bottom:1px solid var(--border); padding:3px 6px;">{{ project.SCAFFOLD_TYPE }}</td>
+    {% else %}
+    <td colspan="2" style="border-bottom:1px solid var(--border); padding:3px 6px;"></td>
+    {% endif %}
     <td style="border-bottom:1px solid var(--border); padding:3px 6px; font-weight:bold; text-align:right; font-size:8pt;">Calculation Sheet</td>
   </tr>
   <tr>
@@ -187,8 +196,10 @@ tr:nth-child(even) td { background: var(--bg-row); }
       <td style="background:var(--bg-hdr); font-weight:bold; border:1px solid var(--border); padding:7px 12px;"><span style="color:var(--navy);">AREA:</span> {{ project.AREA }}</td>
     </tr>
     <tr>
-      <td style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">PERMIT TO WORK No.:</span> {{ project.PERMIT_NO or '-' }}</td>
+      <td {% if not has_scaffold_type %}colspan="2" {% endif %}style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">PERMIT TO WORK No.:</span> {{ project.PERMIT_NO or '-' }}</td>
+      {% if has_scaffold_type %}
       <td style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">TYPE OF SCAFFOLD:</span> {{ project.SCAFFOLD_TYPE }}</td>
+      {% endif %}
     </tr>
     <tr>
       <td colspan="2" style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">SCAFFOLD DRAWING No:</span> {{ project.SCAFFOLD_DRAWING_NO }}</td>
@@ -233,7 +244,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   {% if tie_display_mode == 'worst' and worst_tie %}
   {# ── Design Tie Force: worst single node ── #}
   <div style="margin-top:6px; padding:5px 12px 6px; background:var(--bg-hdr); border-left:4px solid var(--gold);">
-    <div style="font-size:7.5pt; font-weight:bold; color:var(--navy-mid); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:4px;">Design Tie Force &mdash; Worst Single Node</div>
+    <div style="font-size:7.5pt; font-weight:bold; color:var(--navy-mid); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:4px;">Design Tie Force &mdash; Worst Single Node <span class="src-tag" style="text-transform:none; letter-spacing:normal;">(STAAD output)</span></div>
     <table style="border-collapse:collapse; font-size:8.5pt; width:auto;">
       <thead>
         <tr style="background:var(--navy-dark); color:#fff;">
@@ -258,17 +269,17 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <div style="margin-top:6px; padding:5px 12px 6px; background:var(--bg-hdr); border-left:4px solid var(--gold);">
     {% if tie_sum_fx is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy);">
-      Total Horizontal Load in the X Direction (F<sub>X</sub>): {{ tie_sum_fx }} kN
+      Total Horizontal Load in the X Direction (F<sub>X</sub>): {{ tie_sum_fx }} kN{% if tie_fx_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
     {% if tie_sum_fz is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy); margin-top:2px;">
-      Total Horizontal Load in the Z Direction (F<sub>Z</sub>): {{ tie_sum_fz }} kN
+      Total Horizontal Load in the Z Direction (F<sub>Z</sub>): {{ tie_sum_fz }} kN{% if tie_fz_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
     {% if is_hanging and tie_sum_fy is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy); margin-top:2px;">
-      Total Vertical Load in the Y Direction (F<sub>Y</sub>): {{ tie_sum_fy }} kN
+      Total Vertical Load in the Y Direction (F<sub>Y</sub>): {{ tie_sum_fy }} kN{% if tie_fy_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
   </div>
@@ -338,7 +349,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 <div class="page-calc" id="load-summary" style="page-break-after:always; break-after:page;">
 {{ calc_header() }}
 
-<div class="section-hdr">REACTION ON PARENT STRUCTURE (TIES)</div>
+<div class="section-hdr">REACTION ON PARENT STRUCTURE (TIES) <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 
 <div class="callout" style="font-size:8.4pt;">
   The maximum horizontal force at each tie node is reported from the governing ULS load combination.
@@ -558,7 +569,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   Member Load = Load Intensity &times; Tributary Width.
   Edge members carry half the adjacent bay width; interior members carry half the bay from each side.<br/>
   Governing load intensity (SWL) = <strong>{{ structural.swl_display }} kN/m&sup2;</strong>{% if structural.swl_load_class %} &mdash; BS EN 12811-1 Class {{ structural.swl_load_class }}{% endif %}.<br/>
-  Total applied platform live load = <strong>{{ structural.loads.platform_live_total_kn }} kN</strong>.
+  Total applied platform live load = <strong>{{ structural.loads.platform_live_total_kn }} kN</strong> <span class="src-tag">(STAAD output)</span>.
 </div>
 
 {% if structural.handrail_loads.has_x or structural.handrail_loads.has_z %}
@@ -573,11 +584,11 @@ tr:nth-child(even) td { background: var(--bg-row); }
 </table>
 <div class="callout">
   {% if structural.handrail_loads.has_x %}
-  Handrail Load (HLX) = <strong>{{ structural.handrail_loads.total_x }} kN</strong>
+  Handrail Load (HLX) = <strong>{{ structural.handrail_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span>
   {% if structural.handrail_loads.udl_x %}(member UDL {{ structural.handrail_loads.udl_x }} kN/m){% endif %}<br/>
   {% endif %}
   {% if structural.handrail_loads.has_z %}
-  Handrail Load (HLZ) = <strong>{{ structural.handrail_loads.total_z }} kN</strong>
+  Handrail Load (HLZ) = <strong>{{ structural.handrail_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
   {% if structural.handrail_loads.udl_z %}(member UDL {{ structural.handrail_loads.udl_z }} kN/m){% endif %}
   {% endif %}
 </div>
@@ -630,8 +641,8 @@ tr:nth-child(even) td { background: var(--bg-row); }
   </tr>
 </table>
 <div class="callout">
-  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong><br/>
-  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong>
+  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
+  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
 </div>
 {% else %}
 <div class="callout" style="font-size:8.5pt;">
@@ -824,7 +835,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
    SHEET 6 - STATIC CHECK / UC RATIO SUMMARY
    ========================================================== #}
 <div class="page-calc" id="uc-summary">
-<div class="section-hdr">STATIC CHECK PARAMETERS - UTILIZATION RATIO SUMMARY</div>
+<div class="section-hdr">STATIC CHECK PARAMETERS - UTILIZATION RATIO SUMMARY <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 
 {% set cc = structural.code_check %}
 <div class="callout" style="margin:6px 0;">
@@ -877,8 +888,8 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <tr>
     <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8.5pt; vertical-align:top; padding:2px 8px 2px 0;">EN 12811, Table C.1</td>
     <td style="border:none; line-height:1.7;">
-      The maximum axial load on scaffold tube members (from STAAD.Pro Connect Edition analysis) is
-      <strong>{{ "%.3f"|format(max_axial) }} kN</strong>
+      The maximum axial load on scaffold tube members is
+      <strong>{{ "%.3f"|format(max_axial) }} kN</strong> <span class="src-tag">(STAAD output)</span>
       {% if max_axial_member %}(Member {{ max_axial_member }}, {{ max_axial_type }}){% endif %}
       {% if connection_basis == 'SLS' %}under SLS (unfactored, &gamma;=1.0) — the ULS (&gamma;=1.5) axial load
       exceeded Class B capacity, so the check falls back to the SLS basis{% else %}under ULS (&gamma;=1.5){% endif %}.
@@ -920,7 +931,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 </table>
 
 {% if top_axial_members %}
-<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check)</div>
+<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check) <span class="src-tag" style="font-size:7.5pt;">(STAAD output)</span></div>
 {% if connection_basis == 'SLS' %}
 <table style="font-size:8pt; margin-bottom:6px;">
   <thead>
@@ -987,13 +998,13 @@ tr:nth-child(even) td { background: var(--bg-row); }
 
 {# ── Vertical Deflection ── inside same div as Connection Stability so they are ALWAYS on the same page #}
 <div id="deflection-check" style="margin-top:7mm; padding-top:5mm; border-top:1px solid var(--border);">
-<div class="section-hdr">DEFLECTION CHECK RESULTS</div>
+<div class="section-hdr">DEFLECTION CHECK RESULTS <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 <div class="callout" style="margin-bottom:6px;">
   <strong style="color:var(--navy-mid);">BS EN 12811-1, Cl 6.3</strong>&nbsp;&nbsp;
-  Serviceability limit state &mdash; values from STAAD.Pro SLS (unfactored) combination results.
+  Serviceability limit state &mdash; values from the STAAD output file, SLS (unfactored) combination results.
   Displacement tables are shown below.
 </div>
-<div class="sub-hdr">Vertical Deflection Check</div>
+<div class="sub-hdr">Vertical Deflection Check <span class="src-tag">(STAAD output)</span></div>
 <table style="font-size:9pt; margin:4px 0;">
   <thead><tr><th>Parameter</th><th>Value</th><th>Allowable</th><th>Check</th></tr></thead>
   <tbody>
@@ -1032,7 +1043,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
    HORIZONTAL DEFLECTION
    ========================================================== #}
 <div id="deflection-horiz-check" style="margin-top:6mm;">
-<div class="sub-hdr">Horizontal Deflection Check</div>
+<div class="sub-hdr">Horizontal Deflection Check <span class="src-tag">(STAAD output)</span></div>
 <table style="font-size:9pt; margin:6px 0;">
   <thead><tr><th>Parameter</th><th>Value</th><th>Allowable</th><th>Check</th></tr></thead>
   <tbody>
@@ -1073,7 +1084,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 <div class="page-calc" id="conclusion">
 <div class="section-hdr">CONCLUSION</div>
 <div style="border:1px solid var(--border); padding:10px 12px; line-height:1.8; margin-bottom:10px;">
-  The structural analysis and design of the <strong>{{ project.SCAFFOLD_TYPE }}</strong> scaffold confirms
+  The structural analysis and design of the{% if has_scaffold_type %} <strong>{{ project.SCAFFOLD_TYPE }}</strong>{% endif %} scaffold confirms
   the structure is adequate for its intended purpose. All member utilization ratios are below unity
   (maximum UC = <strong>{{ cc.max_ratio }}</strong> at Member {{ cc.max_ratio_member }}).
   Vertical and horizontal deflections are within their respective allowable limits of
@@ -1100,7 +1111,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <div class="navy-gold-rule"></div>
   <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:8pt; color:var(--muted);">
     <span>{{ project.DOCUMENT_NO }} Rev. {{ project.REVISION }}</span>
-    <span style="font-weight:bold; color:var(--navy);">SCAFFOLD DESIGN REPORT - {{ project.SCAFFOLD_TYPE | upper }}</span>
+    <span style="font-weight:bold; color:var(--navy);">SCAFFOLD DESIGN REPORT{% if has_scaffold_type %} - {{ project.SCAFFOLD_TYPE | upper }}{% endif %}</span>
     <span>Prepared: {{ date_gen }}</span>
   </div>
 </div>

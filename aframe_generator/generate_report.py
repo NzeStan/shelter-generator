@@ -968,6 +968,12 @@ def main():
         tie_sum_fx = worst_tie['max_fx'] if worst_tie else None
         tie_sum_fz = worst_tie['max_fz'] if worst_tie else None
 
+    # STAAD-output source tags: TIE_FORCE_FX/FZ are a manual design override (per the
+    # project_info.txt comment), so once set the cover-page value no longer represents a
+    # direct STAAD .out reading and must not be tagged as such.
+    tie_fx_from_out = _optional_float(project.get('TIE_FORCE_FX')) is None
+    tie_fz_from_out = _optional_float(project.get('TIE_FORCE_FZ')) is None
+
     if _optional_float(project.get('TIE_FORCE_FX')) is not None:
         tie_sum_fx = _optional_float(project.get('TIE_FORCE_FX'))
     if _optional_float(project.get('TIE_FORCE_FZ')) is not None:
@@ -1065,6 +1071,8 @@ def main():
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,
         tie_sum_fz        = tie_sum_fz,
+        tie_fx_from_out   = tie_fx_from_out,
+        tie_fz_from_out   = tie_fz_from_out,
         tie_display_mode  = tie_display_mode,
         worst_tie         = worst_tie,
         net_governing     = net_governing,

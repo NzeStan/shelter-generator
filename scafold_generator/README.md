@@ -26,7 +26,7 @@ If browser PDF generation is unavailable, open the generated HTML in Chrome or E
 | Field | Purpose |
 |---|---|
 | `SCAFFOLD_TYPE` | Used in title text, description, and scaffold-specific sections such as hanging-scaffold friction omission. |
-| `EQUIPMENT_NAME`, `EQUIPMENT_TAG`, `WORK_ORDER` | Added to the brief description when provided. Each field can stand alone. |
+| `EQUIPMENT_NAME`, `EQUIPMENT_TAG`, `LINE_NUMBER`, `WORK_ORDER` | Added to the brief description when provided. Each field can stand alone. `EQUIPMENT_TAG` and `LINE_NUMBER` are alternatives for jobs without an equipment tag (e.g. line-only work) — fill in only whichever applies; `EQUIPMENT_TAG` takes precedence if both are set. |
 | `SAFE_WORKING_LOAD`, `SAFE_WORKING_LOAD_KN_M2`, `SERVICE_LOAD_KN_M2`, `LOAD_INTENSITY_KN_M2` | Optional SWL/service-load intensity in kN/m2. These override inferred values. |
 | `LOAD_CLASS` | Optional load class 1-6. Used when no direct kN/m2 intensity is provided. |
 | `TRIBUTARY_WIDTH_M` | Optional override for platform live-load tributary width. Leave blank to auto-infer edge tributary width as half the smallest plan bay spacing. |

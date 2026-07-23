@@ -119,6 +119,7 @@ DEFAULTS = {
     'APPROVED_BY_NAME':  '',
     'EQUIPMENT_TAG':     '',
     'EQUIPMENT_NAME':    '',
+    'LINE_NUMBER':       '',
     'WORK_ORDER':        '',
     'PURPOSE':           'maintenance activities',
     'STRUCTURE_ABOVE_GROUND_M': '',
@@ -1244,15 +1245,18 @@ def _counterweight_design(project, structural):
 
 def _brief_description(project, structural, structure_above_ground):
     purpose = str(project.get("PURPOSE") or "the intended work activity").strip()
-    scaffold_type = str(project.get("SCAFFOLD_TYPE") or "scaffold").strip()
-    article = _indefinite_article(scaffold_type)
+    scaffold_type = str(project.get("SCAFFOLD_TYPE") or "").strip()
     location_text = str(project.get("LOCATION") or "").strip()
 
     equipment_bits = []
     if str(project.get("EQUIPMENT_NAME") or "").strip():
         equipment_bits.append(str(project["EQUIPMENT_NAME"]).strip())
-    if str(project.get("EQUIPMENT_TAG") or "").strip():
-        equipment_bits.append(f"equipment tag {str(project['EQUIPMENT_TAG']).strip()}")
+    equipment_tag = str(project.get("EQUIPMENT_TAG") or "").strip()
+    line_number = str(project.get("LINE_NUMBER") or "").strip()
+    if equipment_tag:
+        equipment_bits.append(f"equipment tag {equipment_tag}")
+    elif line_number:
+        equipment_bits.append(f"line number {line_number}")
     equipment_text = ""
     if equipment_bits:
         equipment_text = " of the " + ", ".join(equipment_bits)
@@ -1279,8 +1283,14 @@ def _brief_description(project, structural, structure_above_ground):
     else:
         component_text = components[0]
 
+    if scaffold_type:
+        article = _indefinite_article(scaffold_type)
+        opening = f"This document describes the structural design of {article} {scaffold_type} scaffold required for "
+    else:
+        opening = "This document describes the structural design of a scaffold required for "
+
     return (
-        f"This document describes the structural design of {article} {scaffold_type} scaffold required for "
+        f"{opening}"
         f"{purpose}{equipment_text}{work_order_text}{location_sentence}. "
         f"The scaffold envelope is {structural['dimension_display']} (length x width x height) and "
         f"is configured with {component_text} as indicated on the approved drawing.{height_sentence}"
@@ -1856,7 +1866,7 @@ def make_install_notes(structural, project=None):
     mids    = g['mid_lifts']
     tie_h   = s.get('tie_heights', [H])
     tie_n   = s.get('tie_nodes', [])
-    scaffold_type = str(project.get('SCAFFOLD_TYPE', 'scaffold')).strip() or 'scaffold'
+    scaffold_type = str(project.get('SCAFFOLD_TYPE', 'scaffold')).strip()
     scaffold_key = scaffold_type.upper()
     purpose = str(project.get('PURPOSE', 'the approved task')).strip() or 'the approved task'
     hanging = _is_hanging_scaffold(scaffold_type)
@@ -1864,11 +1874,12 @@ def make_install_notes(structural, project=None):
     birdcage = 'BIRDCAGE' in scaffold_key
     tower = 'TOWER' in scaffold_key
     composite = 'COMPOSITE' in scaffold_key
+    scaffold_config_text = f"the {scaffold_type} scaffold" if scaffold_type else "the scaffold"
 
     notes = [
         "The scaffold working drawings and purpose of the scaffold must be reviewed and "
         "discussed by all personnel involved prior to execution.",
-        f"Confirm that the {scaffold_type} scaffold configuration matches the approved drawing "
+        f"Confirm that {scaffold_config_text} configuration matches the approved drawing "
         f"and is suitable for {purpose}.",
         "The work vicinity must be barricaded and appropriate signage placed at all access points.",
         "All scaffolders must wear complete PPE in accordance with NLNG work-at-height regulations.",
@@ -2066,6 +2077,7 @@ def main():
         False
     )
     show_frictional_resistance = not _is_hanging_scaffold(project.get('SCAFFOLD_TYPE'))
+    has_scaffold_type = bool(str(project.get('SCAFFOLD_TYPE') or '').strip())
     has_handrail = bool(hl.get('has_x') or hl.get('has_z'))
     has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
     has_wind = bool(wl.get('has_wind'))
@@ -2088,6 +2100,13 @@ def main():
     else:
         tie_sum_fx = worst_tie['max_fx'] if worst_tie else None
         tie_sum_fz = worst_tie['max_fz'] if worst_tie else None
+
+    # STAAD-output source tags: TIE_FORCE_FX/FZ/FY are a manual design override (per the
+    # project_info.txt comment), so once set the cover-page value no longer represents a
+    # direct STAAD .out reading and must not be tagged as such.
+    tie_fx_from_out = _optional_float(project.get('TIE_FORCE_FX')) is None
+    tie_fz_from_out = _optional_float(project.get('TIE_FORCE_FZ')) is None
+    tie_fy_from_out = _optional_float(project.get('TIE_FORCE_FY')) is None
 
     if _optional_float(project.get('TIE_FORCE_FX')) is not None:
         tie_sum_fx = _optional_float(project.get('TIE_FORCE_FX'))
@@ -2281,12 +2300,16 @@ def main():
         has_handrail = has_handrail,
         has_ties = has_ties,
         has_wind = has_wind,
+        has_scaffold_type = has_scaffold_type,
         show_assurance_note = show_assurance_note,
         show_frictional_resistance = show_frictional_resistance,
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,
         tie_sum_fz        = tie_sum_fz,
         tie_sum_fy        = tie_sum_fy,
+        tie_fx_from_out   = tie_fx_from_out,
+        tie_fz_from_out   = tie_fz_from_out,
+        tie_fy_from_out   = tie_fy_from_out,
         is_hanging        = is_hanging,
         tie_display_mode  = tie_display_mode,
         worst_tie         = worst_tie,

@@ -112,6 +112,11 @@ tr:nth-child(even) td { background: var(--bg-row); }
 .toc-subentry { padding-left: 14px; font-size: 9pt; }
 .toc-section { font-weight: bold; color: var(--navy); margin-top: 8px; font-size: 10pt; }
 
+/* STAAD output source tag */
+.src-tag { font-size: 6.5pt; font-style: italic; font-weight: normal; color: var(--muted);
+           margin-left: 4px; white-space: nowrap; }
+th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
+
 /* Cover approval table */
 .signature-table { table-layout: fixed; }
 .signature-table th,
@@ -223,7 +228,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
   {% if tie_display_mode == 'worst' and worst_tie %}
   {# ── Design Tie Force: worst single node ── #}
   <div style="margin-top:6px; padding:5px 12px 6px; background:var(--bg-hdr); border-left:4px solid var(--gold);">
-    <div style="font-size:7.5pt; font-weight:bold; color:var(--navy-mid); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:4px;">Design Tie Force &mdash; Worst Single Node</div>
+    <div style="font-size:7.5pt; font-weight:bold; color:var(--navy-mid); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:4px;">Design Tie Force &mdash; Worst Single Node <span class="src-tag" style="text-transform:none; letter-spacing:normal;">(STAAD output)</span></div>
     <table style="border-collapse:collapse; font-size:8.5pt; width:auto;">
       <thead>
         <tr style="background:var(--navy-dark); color:#fff;">
@@ -248,12 +253,12 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <div style="margin-top:6px; padding:5px 12px 6px; background:var(--bg-hdr); border-left:4px solid var(--gold);">
     {% if tie_sum_fx is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy);">
-      Total Horizontal Load in the X Direction (F<sub>X</sub>): {{ tie_sum_fx }} kN
+      Total Horizontal Load in the X Direction (F<sub>X</sub>): {{ tie_sum_fx }} kN{% if tie_fx_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
     {% if tie_sum_fz is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy); margin-top:2px;">
-      Total Horizontal Load in the Z Direction (F<sub>Z</sub>): {{ tie_sum_fz }} kN
+      Total Horizontal Load in the Z Direction (F<sub>Z</sub>): {{ tie_sum_fz }} kN{% if tie_fz_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
   </div>
@@ -323,7 +328,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 <div class="page-calc" id="load-summary" style="page-break-after:always; break-after:page;">
 {{ calc_header() }}
 
-<div class="section-hdr">REACTION ON PARENT STRUCTURE (TIES)</div>
+<div class="section-hdr">REACTION ON PARENT STRUCTURE (TIES) <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 
 <div class="callout" style="font-size:8.4pt;">
   The maximum horizontal force at each tie node is reported from the governing ULS load combination.
@@ -523,8 +528,8 @@ tr:nth-child(even) td { background: var(--bg-row); }
   </tr>
 </table>
 <div class="callout">
-  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong><br/>
-  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong>
+  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
+  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
 </div>
 {% else %}
 <div class="callout" style="font-size:8.5pt;">
@@ -654,7 +659,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
    SHEET 5 - STATIC CHECK / UC RATIO SUMMARY
    ========================================================== #}
 <div class="page-calc" id="uc-summary">
-<div class="section-hdr">STATIC CHECK PARAMETERS - UTILIZATION RATIO SUMMARY</div>
+<div class="section-hdr">STATIC CHECK PARAMETERS - UTILIZATION RATIO SUMMARY <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 
 {% set cc = structural.code_check %}
 <div class="callout" style="margin:6px 0;">
@@ -707,8 +712,8 @@ tr:nth-child(even) td { background: var(--bg-row); }
   <tr>
     <td style="border:none; width:155px; font-weight:bold; color:var(--navy-mid); font-size:8.5pt; vertical-align:top; padding:2px 8px 2px 0;">EN 12811, Table C.1</td>
     <td style="border:none; line-height:1.7;">
-      The maximum axial load on scaffold tube members (from STAAD.Pro Connect Edition analysis) is
-      <strong>{{ "%.3f"|format(max_axial) }} kN</strong>
+      The maximum axial load on scaffold tube members is
+      <strong>{{ "%.3f"|format(max_axial) }} kN</strong> <span class="src-tag">(STAAD output)</span>
       {% if max_axial_member %}(Member {{ max_axial_member }}, {{ max_axial_type }}){% endif %}
       {% if connection_basis == 'SLS' %}under SLS (unfactored, &gamma;=1.0) — the ULS (&gamma;=1.5) axial load
       exceeded Class B capacity, so the check falls back to the SLS basis{% else %}under ULS (&gamma;=1.5){% endif %}.
@@ -750,7 +755,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
 </table>
 
 {% if top_axial_members %}
-<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check)</div>
+<div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check) <span class="src-tag" style="font-size:7.5pt;">(STAAD output)</span></div>
 {% if connection_basis == 'SLS' %}
 <table style="font-size:8pt; margin-bottom:6px;">
   <thead>
@@ -815,13 +820,13 @@ tr:nth-child(even) td { background: var(--bg-row); }
 
 {# ── Vertical Deflection ── inside same div as Connection Stability so they are ALWAYS on the same page #}
 <div id="deflection-check" style="margin-top:7mm; padding-top:5mm; border-top:1px solid var(--border);">
-<div class="section-hdr">DEFLECTION CHECK RESULTS</div>
+<div class="section-hdr">DEFLECTION CHECK RESULTS <span class="src-tag" style="font-size:8pt;">(STAAD output)</span></div>
 <div class="callout" style="margin-bottom:6px;">
   <strong style="color:var(--navy-mid);">BS EN 12811-1, Cl 6.3</strong>&nbsp;&nbsp;
-  Serviceability limit state &mdash; values from STAAD.Pro SLS (unfactored) combination results.
+  Serviceability limit state &mdash; values from the STAAD output file, SLS (unfactored) combination results.
   Displacement tables are shown below.
 </div>
-<div class="sub-hdr">Vertical Deflection Check</div>
+<div class="sub-hdr">Vertical Deflection Check <span class="src-tag">(STAAD output)</span></div>
 <table style="font-size:9pt; margin:4px 0;">
   <thead><tr><th>Parameter</th><th>Value</th><th>Allowable</th><th>Check</th></tr></thead>
   <tbody>
@@ -860,7 +865,7 @@ tr:nth-child(even) td { background: var(--bg-row); }
    HORIZONTAL DEFLECTION
    ========================================================== #}
 <div id="deflection-horiz-check" style="margin-top:6mm;">
-<div class="sub-hdr">Horizontal Deflection Check</div>
+<div class="sub-hdr">Horizontal Deflection Check <span class="src-tag">(STAAD output)</span></div>
 <table style="font-size:9pt; margin:6px 0;">
   <thead><tr><th>Parameter</th><th>Value</th><th>Allowable</th><th>Check</th></tr></thead>
   <tbody>
