@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-031
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-031
+DOCUMENT_NO:         PMS-WA-ARCO-049
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-049
 REVISION:            0
 
 # Integrated outputs
@@ -19,7 +19,7 @@ SCAFFOLD_TYPE:       A Frame
 RISK_LEVEL:          Medium
 
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/2413
+ERMT_NO:             PIC/PMS/26/
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
@@ -31,17 +31,17 @@ DESIGNED_BY_ID:      PMS/C3-1141
 DESIGNED_BY_NAME:    Nnamani, Ifeanyi
 VERIFIED_BY_ID:      PMS/612C
 VERIFIED_BY_NAME:    Olowo, Peter
-REVIEWED_BY_ID:      PIC/33C
-REVIEWED_BY_NAME:    Ezewoko, Joseph
-APPROVED_BY_ID:      PIC/1
-APPROVED_BY_NAME:    Edobor, Osahon
+REVIEWED_BY_ID:      PIC/32C
+REVIEWED_BY_NAME:    Ogili, Ugochukwu
+APPROVED_BY_ID:      PIC/2
+APPROVED_BY_NAME:    Chima, Tasieobi
 CHECKED_BY_ID:       PMS/6
 CHECKED_BY_NAME:     Omikunle, Akinwale
-PREPARED_BY_NAME:    
+PREPARED_BY_NAME:   
 
 
 # Job details
-EQUIPMENT_TAG:       311TRCA-015
+EQUIPMENT_TAG:       314UZ801
 WORK_ORDER:          
 PURPOSE:             valve lifting during the turnaround maintenance activity in train 3
 STRUCTURE_ABOVE_GROUND_M: 
@@ -51,8 +51,8 @@ DOC_LIFE:            3 Years
 # Connection Stability
 # Max axial force read from STAAD member force / code check table.
 # Leave blank to auto-extract from .out file code check results.
-MAX_AXIAL_KN:3.526
-MAX_AXIAL_MEMBER:96
+MAX_AXIAL_KN: 1.234
+MAX_AXIAL_MEMBER:51
 
 # Deflection Check - from STAAD GUI SLS combination results
 #
