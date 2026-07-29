@@ -38,6 +38,7 @@ class StaadParser:
         handrail = self._parse_handrail_loads(load_cases, load_summaries)
 
         code_chk = self._parse_code_check(out)
+        member_forces = self._parse_member_forces(out)
         displ    = self._parse_displacements(out, combos)
 
         # Frictional resistance back-calculated from KFX in SUPPORTS line:
@@ -65,6 +66,7 @@ class StaadParser:
             'wind_loads':            wind,
             'handrail_loads':        handrail,
             'code_check':            code_chk,
+            'member_forces':         member_forces,
             'displacements':         displ,
             'load_combinations':     combos,
             'support_reactions':      support_reactions,
@@ -757,6 +759,68 @@ class StaadParser:
             )
             if wz:
                 result['total_z'] = float(wz.group(1))
+
+        return result
+
+    # member forces (real per-member, per-load-case axial force)
+
+    def _parse_member_forces(self, out):
+        """
+        Parse 'MEMBER END FORCES' tables (from a STAAD 'PRINT MEMBER FORCES' command)
+        for the real per-member, per-load-case axial force - independent of whichever
+        load case happens to govern that member's steel code check.
+
+        Format is fixed-width and stateful: MEMBER and LOAD are only printed when they
+        change, so a data row carries 1, 2, or 3 leading integers depending on what's
+        continuing from the row above:
+            <member> <load> <jt> <axial> ...   (new member, new load, joint 1)
+                      <load> <jt> <axial> ...   (same member, new load, joint 1)
+                             <jt> <axial> ...   (same member, same load, joint 2)
+
+        Returns {member_id: {load_case: axial_kn}}, keeping the larger-magnitude axial
+        of the member's two end joints (STAAD prints an equal-and-opposite pair).
+        """
+        result = {}
+        m = re.search(
+            r'MEMBER END FORCES.*?END OF LATEST ANALYSIS RESULT',
+            out, re.DOTALL
+        )
+        if not m:
+            return result
+
+        member = None
+        load = None
+        for raw_line in m.group(0).splitlines():
+            line = raw_line.strip()
+            if not re.match(r'^-?[\d.]', line):
+                continue
+
+            toks = line.split()
+            n_int = 0
+            for t in toks:
+                if re.match(r'^-?\d+$', t):
+                    n_int += 1
+                else:
+                    break
+            if n_int not in (1, 2, 3) or len(toks) <= n_int:
+                continue
+
+            try:
+                axial = float(toks[n_int])
+            except ValueError:
+                continue
+
+            if n_int == 3:
+                member, load = int(toks[0]), int(toks[1])
+            elif n_int == 2:
+                load = int(toks[0])
+            if member is None or load is None:
+                continue
+
+            per_load = result.setdefault(member, {})
+            prev = per_load.get(load)
+            if prev is None or abs(axial) > abs(prev):
+                per_load[load] = axial
 
         return result
 

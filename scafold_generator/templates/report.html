@@ -932,7 +932,28 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
 
 {% if top_axial_members %}
 <div class="sub-hdr" style="margin-top:8px;">Member Axial Force Summary (Top {{ [top_axial_members|length, 30]|min }} Horizontal Members — {{ connection_basis }} Code Check) <span class="src-tag" style="font-size:7.5pt;">(STAAD output)</span></div>
-{% if connection_basis == 'SLS' %}
+{% if axial_source == 'member_forces' %}
+<table style="font-size:8pt; margin-bottom:6px;">
+  <thead>
+    <tr>
+      <th style="width:22%;">Member</th>
+      <th style="width:22%;">Type</th>
+      <th style="width:22%;">L/C</th>
+      <th style="width:34%; background:var(--gold); color:var(--navy);">Axial Force (kN)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in top_axial_members %}
+    <tr>
+      <td style="text-align:center; font-weight:bold;">{{ m.member }}</td>
+      <td style="text-align:center;">{{ m.type or 'C' }}</td>
+      <td style="text-align:center;">{{ m.lc }}</td>
+      <td style="text-align:center; font-weight:bold; {% if m.axial == max_axial %}background:#D4EDDA;{% endif %}">{{ "%.3f"|format(m.axial) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% elif connection_basis == 'SLS' %}
 <table style="font-size:8pt; margin-bottom:6px;">
   <thead>
     <tr>
