@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-049
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-049
+DOCUMENT_NO:         PMS-WA-ARCO-056
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-056
 REVISION:            0
 
 # Integrated outputs
@@ -11,15 +11,27 @@ REVISION:            0
 AUTO_RENDER_3D_MODEL:        yes
 AUTO_ENGINEERING_DRAWINGS:   yes
 ENGINEERING_DRAWING_FORMAT:  standard
+# Show the large 3D Isometric View as the last page of the PDF (default: yes)
+SHOW_3D_ISOMETRIC_PAGE:      no
 
 # Scaffold location and type
-LOCATION:            TRAIN 3
+LOCATION:            Train 3
 AREA:                D
 SCAFFOLD_TYPE:       A Frame
 RISK_LEVEL:          Medium
 
+# Page 2 — Reaction on Parent Structure (Ties).
+# Set to "yes" to include the full tie-by-tie reaction table as a separate calc page.
+# Default is "no" (tie FX/FZ sums are still shown on the cover page).
+SHOW_TIE_REACTIONS: no
+# Cover page horizontal load display: "sum" (default) = net total; "worst" = Design Tie Force (worst single node).
+TIE_DISPLAY:         sum
+# Manual override for cover page tie forces (kN). Leave blank to use auto-calculated values.
+TIE_FORCE_FX:4.073
+TIE_FORCE_FZ:0.713
+
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/
+ERMT_NO:             PIC/PMS/26/3139
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
@@ -41,11 +53,11 @@ PREPARED_BY_NAME:
 
 
 # Job details
-EQUIPMENT_TAG:       314UZ801
+EQUIPMENT_TAG:       314HIC-055
 WORK_ORDER:          
-PURPOSE:             valve lifting during the turnaround maintenance activity in train 3
-STRUCTURE_ABOVE_GROUND_M: 
-WIND_CALC_HEIGHT_M: 
+PURPOSE:             valve lifting during the turnaround maintenance activity
+STRUCTURE_ABOVE_GROUND_M: 17
+WIND_CALC_HEIGHT_M: 21
 DOC_LIFE:            3 Years
 
 # Connection Stability
@@ -65,10 +77,10 @@ MAX_AXIAL_MEMBER:51
 #                     Length used as L for L/200.
 #                     Leave blank -> L defaults to scaffold depth.
 #
-MAX_VERT_DISP_MM:1.875
-MAX_VERT_MEMBER:28
-MAX_VERT_DISP_LC:17
+MAX_VERT_DISP_MM:1.199
+MAX_VERT_MEMBER:120
+MAX_VERT_DISP_LC:16
 
-MAX_HORIZ_DISP_MM:1.349
+MAX_HORIZ_DISP_MM:0.758
 MAX_HORIZ_MEMBER:38
-MAX_HORIZ_DISP_LC:15
+MAX_HORIZ_DISP_LC:20
