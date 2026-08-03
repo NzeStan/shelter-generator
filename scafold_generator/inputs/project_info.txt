@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-047
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-047
+DOCUMENT_NO:         PMS-WA-ARCO-054
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-054
 REVISION:            0
 
 # Integrated outputs
@@ -24,9 +24,9 @@ COUNTERWEIGHT_PIVOT_NODES:   23,38,24
 COUNTERWEIGHT_SAFETY_FACTOR: 4
 
 # Scaffold location and type
-LOCATION:            Train 2
-AREA:                D
-SCAFFOLD_TYPE:       Hanging
+LOCATION:            Unit 4700
+AREA:                A
+SCAFFOLD_TYPE:       
 RISK_LEVEL:          High
 
 # Load Intensity (SWL)
@@ -42,19 +42,19 @@ SHOW_TIE_REACTIONS: no
 # Cover page horizontal load display: "sum" (default) = net total; "worst" = Design Tie Force (worst single node).
 TIE_DISPLAY:         sum
 # Manual override for cover page tie forces (kN). Leave blank to use auto-calculated values.
-# TIE_FORCE_FY applies to Hanging scaffolds only (vertical reaction at suspension points).
-# Not applicable to this project (Cantilever, counterweight-stabilised, no ties) — left blank.
-TIE_FORCE_FX:2.150
-TIE_FORCE_FZ:7.96
-TIE_FORCE_FY:18.433
+# TIE_FORCE_FY displays for Hanging scaffolds, or any project with a plain FIXED support in
+# the STAAD SUPPORTS block (a FIXED support always carries a vertical reaction).
+TIE_FORCE_FX:1.350
+TIE_FORCE_FZ:0.018
+TIE_FORCE_FY:4.717
 
-PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/2971
+PERMIT_NO:           251552
+ERMT_NO:             PIC/PMS/26/3159
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
-NOTE: 
-WARNING:
+NOTE: The scaffold may require modification during the execution of the work; therefore, scaffolders may be present in the work area after the scaffold has been erected.
+WARNING:The crane shall be isolated before and throughout all scaffolding activities, including erection, modification, inspection, and dismantling. The Scaffold Supervisor shall verify and confirm crane isolation before requesting the Permit to Work. The area surrounding the crane shall be barricaded during scaffold erection, modification, and dismantling activities to prevent unauthorized access. This scaffold design is based on the assumption that these safety requirements are fully implemented. The designer accepts no responsibility for incidents arising from failure to comply with these precautions
 
 # Personnel
 DESIGNED_BY_ID:      PMS/C3-1141
@@ -73,22 +73,22 @@ PREPARED_BY_NAME:
 # Job details
 # Use EQUIPMENT_TAG for equipment-tagged jobs, or LINE_NUMBER for line-only jobs (no equipment
 # tag). Fill in only whichever one applies — EQUIPMENT_TAG takes precedence if both are set.
-EQUIPMENT_NAME:
-EQUIPMENT_TAG:
-LINE_NUMBER:        TR2_12-SDS_2IN-2P12001-1-61174M
-WORK_ORDER:         4030634
-PURPOSE:             maintenance
-STRUCTURE_ABOVE_GROUND_M: 13
-WIND_CALC_HEIGHT_M: 15
+EQUIPMENT_NAME:     
+EQUIPMENT_TAG:      GPD_84-BLD_B8412-ZK-001
+LINE_NUMBER:        
+WORK_ORDER:          4067788
+PURPOSE:             personnel access for lighting maintenance work on the Overhead Crane
+STRUCTURE_ABOVE_GROUND_M: 
+WIND_CALC_HEIGHT_M: 
 DOC_LIFE:            3 Years
 
 # Deflection Check — auto-extracted from .out file SLS combination results.
 # Override only if auto-extraction fails:
-MAX_VERT_DISP_MM:2.113
-MAX_VERT_DISP_LC:8
-MAX_HORIZ_DISP_MM:0.509
-MAX_HORIZ_DISP_LC:8
+MAX_VERT_DISP_MM:0.288
+MAX_VERT_DISP_LC:6
+MAX_HORIZ_DISP_MM:0.473
+MAX_HORIZ_DISP_LC:6
 # Member ID whose length defines the span L for deflection limits (optional).
 # If blank, the member connected to the critical-displacement node is used automatically.
-MAX_VERT_MEMBER:169
-MAX_HORIZ_MEMBER:24
+MAX_VERT_MEMBER:20
+MAX_HORIZ_MEMBER:10

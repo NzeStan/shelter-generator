@@ -277,7 +277,7 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
       Total Horizontal Load in the Z Direction (F<sub>Z</sub>): {{ tie_sum_fz }} kN{% if tie_fz_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>
     {% endif %}
-    {% if is_hanging and tie_sum_fy is not none %}
+    {% if (is_hanging or has_fixed_supports) and tie_sum_fy is not none %}
     <div style="font-size:10pt; font-weight:bold; color:var(--navy); margin-top:2px;">
       Total Vertical Load in the Y Direction (F<sub>Y</sub>): {{ tie_sum_fy }} kN{% if tie_fy_from_out %} <span class="src-tag">(STAAD output)</span>{% endif %}
     </div>

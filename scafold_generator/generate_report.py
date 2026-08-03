@@ -2114,8 +2114,12 @@ def main():
         tie_sum_fz = _optional_float(project.get('TIE_FORCE_FZ'))
 
     is_hanging = 'HANGING' in str(project.get('SCAFFOLD_TYPE') or '').upper()
+    # A plain FIXED support (as opposed to "FIXED BUT ...") always carries a vertical (FY)
+    # reaction, so the Total Vertical Load display applies whenever the STAAD model has one
+    # — not just for Hanging scaffolds.
+    has_fixed_supports = bool(structural.get('supports', {}).get('fixed_nodes'))
     tie_sum_fy = None
-    if is_hanging:
+    if is_hanging or has_fixed_supports:
         fy_governing = sr.get('net_fy_at_fixed', {}).get('governing')
         if fy_governing:
             tie_sum_fy = fy_governing['total_y']
@@ -2383,6 +2387,7 @@ def main():
         tie_fz_from_out   = tie_fz_from_out,
         tie_fy_from_out   = tie_fy_from_out,
         is_hanging        = is_hanging,
+        has_fixed_supports = has_fixed_supports,
         tie_display_mode  = tie_display_mode,
         worst_tie         = worst_tie,
         net_governing     = net_governing,
