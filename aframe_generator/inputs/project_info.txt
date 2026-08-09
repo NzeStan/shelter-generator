@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-049
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-049
+DOCUMENT_NO:         PMS-WA-ARCO-072
+SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-072
 REVISION:            0
 
 # Integrated outputs
@@ -15,8 +15,8 @@ ENGINEERING_DRAWING_FORMAT:  standard
 SHOW_3D_ISOMETRIC_PAGE:      no
 
 # Scaffold location and type
-LOCATION:            Train 3
-AREA:                D
+LOCATION:            Chiller-1
+AREA:                C
 SCAFFOLD_TYPE:       A Frame
 RISK_LEVEL:          Medium
 
@@ -27,11 +27,11 @@ SHOW_TIE_REACTIONS: no
 # Cover page horizontal load display: "sum" (default) = net total; "worst" = Design Tie Force (worst single node).
 TIE_DISPLAY:         sum
 # Manual override for cover page tie forces (kN). Leave blank to use auto-calculated values.
-TIE_FORCE_FX:3.021
-TIE_FORCE_FZ:0.263
+TIE_FORCE_FX:0.023
+TIE_FORCE_FZ:2.342
 
 PERMIT_NO:
-ERMT_NO:             PIC/PMS/26/3136
+ERMT_NO:             PIC/PMS/26/3196
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
@@ -53,9 +53,9 @@ PREPARED_BY_NAME:
 
 
 # Job details
-EQUIPMENT_TAG:       314UZ801
+EQUIPMENT_TAG:       
 WORK_ORDER:          
-PURPOSE:             valve lifting during the turnaround maintenance activity
+PURPOSE:             spool lifting during the 1-K-3703 outage
 STRUCTURE_ABOVE_GROUND_M: 
 WIND_CALC_HEIGHT_M: 
 DOC_LIFE:            3 Years
@@ -77,10 +77,10 @@ MAX_AXIAL_MEMBER:51
 #                     Length used as L for L/200.
 #                     Leave blank -> L defaults to scaffold depth.
 #
-MAX_VERT_DISP_MM:0.967
+MAX_VERT_DISP_MM:0.745
 MAX_VERT_MEMBER:24
 MAX_VERT_DISP_LC:19
 
-MAX_HORIZ_DISP_MM:1.017
+MAX_HORIZ_DISP_MM:0.732
 MAX_HORIZ_MEMBER:38
 MAX_HORIZ_DISP_LC:15
