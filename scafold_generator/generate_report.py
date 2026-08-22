@@ -2076,7 +2076,12 @@ def main():
         _project_value(project, 'CATEGORY_1_ASSURANCE_NOTE', 'SHOW_CATEGORY_1_NOTE', 'ASSURANCE_NOTE'),
         False
     )
-    show_frictional_resistance = not _is_hanging_scaffold(project.get('SCAFFOLD_TYPE'))
+    # Frictional resistance only means something when the model actually has a
+    # KFX/KFZ spring base support ("FIXED BUT MX MY MZ KFX ... KFZ ..."); when
+    # every support is a plain, fully-fixed support (no friction spring defined),
+    # the calc would just be showing the parser's meaningless fallback default -
+    # so hide it regardless of SCAFFOLD_TYPE.
+    show_frictional_resistance = bool(structural.get('supports', {}).get('base_nodes'))
     has_scaffold_type = bool(str(project.get('SCAFFOLD_TYPE') or '').strip())
     has_handrail = bool(hl.get('has_x') or hl.get('has_z'))
     has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
