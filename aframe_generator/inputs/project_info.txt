@@ -19,6 +19,8 @@ LOCATION:            Chiller-1
 AREA:                C
 SCAFFOLD_TYPE:       A Frame
 RISK_LEVEL:          Medium
+# Cover page CATEGORY label: yes = "Category 1 Engineered Scaffold", no/blank = "Category 2 Engineered Scaffold".
+CATEGORY_1_ASSURANCE_NOTE: no
 
 # Page 2 — Reaction on Parent Structure (Ties).
 # Set to "yes" to include the full tie-by-tie reaction table as a separate calc page.

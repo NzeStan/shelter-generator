@@ -97,6 +97,7 @@ DEFAULTS = {
     'AREA':              'X',
     'SCAFFOLD_TYPE':     'A Frame',
     'RISK_LEVEL':        'Medium',       # High / Medium / Low
+    'CATEGORY_1_ASSURANCE_NOTE': '',
     'PERMIT_NO':         '',
     'ERMT_NO':           '',
     # Optional cover-page callouts — shown once under Brief Description (after the tie
@@ -259,6 +260,14 @@ def _bool_setting(value, default=True):
     if value is None or str(value).strip() == "":
         return default
     return str(value).strip().lower() in {"1", "yes", "y", "true", "on"}
+
+
+def _project_value(project, *keys):
+    for key in keys:
+        value = project.get(key, "")
+        if str(value).strip():
+            return str(value).strip()
+    return ""
 
 
 def _indefinite_article(text):
@@ -951,6 +960,25 @@ def main():
     has_ties = bool(structural.get('supports', {}).get('tie_nodes'))
     has_wind = bool(wl.get('has_wind'))
     show_tie_reactions = _bool_setting(project.get('SHOW_TIE_REACTIONS'), False)
+    show_assurance_note = _bool_setting(
+        _project_value(project, 'CATEGORY_1_ASSURANCE_NOTE', 'SHOW_CATEGORY_1_NOTE', 'ASSURANCE_NOTE'),
+        False
+    )
+    # Signature table: a role row only appears when it has a name, and the ID
+    # column only appears at all when at least one of the rows actually being
+    # shown has an ID to display.
+    signatory_rows = [
+        (role, pid, name)
+        for role, pid, name in (
+            ('DESIGNED BY', project.get('DESIGNED_BY_ID'), project.get('DESIGNED_BY_NAME')),
+            ('VERIFIED BY', project.get('VERIFIED_BY_ID'), project.get('VERIFIED_BY_NAME')),
+            ('CHECKED BY',  project.get('CHECKED_BY_ID'),  project.get('CHECKED_BY_NAME')),
+            ('REVIEWED BY', project.get('REVIEWED_BY_ID'), project.get('REVIEWED_BY_NAME')),
+            ('APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
+        )
+        if str(name or '').strip()
+    ]
+    has_any_signatory_id = any(str(pid or '').strip() for _, pid, _ in signatory_rows)
 
     sr = structural.get('support_reactions', {})
     worst_tie     = sr.get('worst_individual_tie')
@@ -1140,6 +1168,9 @@ def main():
         cover_callout_font_pt = cover_callout_font_pt,
         has_ties = has_ties,
         has_wind = has_wind,
+        show_assurance_note = show_assurance_note,
+        signatory_rows = signatory_rows,
+        has_any_signatory_id = has_any_signatory_id,
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,
         tie_sum_fz        = tie_sum_fz,

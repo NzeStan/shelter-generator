@@ -2076,6 +2076,21 @@ def main():
         _project_value(project, 'CATEGORY_1_ASSURANCE_NOTE', 'SHOW_CATEGORY_1_NOTE', 'ASSURANCE_NOTE'),
         False
     )
+    # Signature table: a role row only appears when it has a name, and the ID
+    # column only appears at all when at least one of the rows actually being
+    # shown has an ID to display.
+    signatory_rows = [
+        (role, pid, name)
+        for role, pid, name in (
+            ('DESIGNED BY', project.get('DESIGNED_BY_ID'), project.get('DESIGNED_BY_NAME')),
+            ('VERIFIED BY', project.get('VERIFIED_BY_ID'), project.get('VERIFIED_BY_NAME')),
+            ('CHECKED BY',  project.get('CHECKED_BY_ID'),  project.get('CHECKED_BY_NAME')),
+            ('REVIEWED BY', project.get('REVIEWED_BY_ID'), project.get('REVIEWED_BY_NAME')),
+            ('APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
+        )
+        if str(name or '').strip()
+    ]
+    has_any_signatory_id = any(str(pid or '').strip() for _, pid, _ in signatory_rows)
     # Frictional resistance only means something when the model actually has a
     # KFX/KFZ spring base support ("FIXED BUT MX MY MZ KFX ... KFZ ..."); when
     # every support is a plain, fully-fixed support (no friction spring defined),
@@ -2383,6 +2398,8 @@ def main():
         has_wind = has_wind,
         has_scaffold_type = has_scaffold_type,
         show_assurance_note = show_assurance_note,
+        signatory_rows = signatory_rows,
+        has_any_signatory_id = has_any_signatory_id,
         show_frictional_resistance = show_frictional_resistance,
         show_tie_reactions = show_tie_reactions,
         tie_sum_fx        = tie_sum_fx,

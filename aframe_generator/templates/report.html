@@ -191,6 +191,9 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
       <td colspan="2" style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">SCAFFOLD DRAWING No:</span> {{ project.SCAFFOLD_DRAWING_NO }}</td>
     </tr>
     <tr>
+      <td colspan="2" style="border:1px solid var(--border); padding:7px 12px;"><span style="font-weight:bold; color:var(--navy);">CATEGORY:</span> {% if show_assurance_note %}Category 1 Engineered Scaffold{% else %}Category 2 Engineered Scaffold{% endif %}</td>
+    </tr>
+    <tr>
       <td colspan="2" style="border:1px solid var(--border); padding:7px 12px;">
         <strong style="color:var(--navy);">RISK CLASSIFICATION:</strong>&nbsp;&nbsp;
         {% set r = project.RISK_LEVEL | upper %}
@@ -201,7 +204,9 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
     </tr>
   </table>
 
-  <div class="notice" style="margin-top:10px;">SCAFFOLD TO BE INSPECTED &amp; TAGGED BEFORE USE</div>
+  <div class="notice" style="margin-top:10px;">
+    {% if show_assurance_note %}SCAFFOLD TO BE INSPECTED BY PIC BEFORE TAGGING{% else %}SCAFFOLD TO BE INSPECTED &amp; TAGGED BEFORE USE{% endif %}
+  </div>
 
   {# Brief description + site photo side by side #}
   <div style="display:flex; gap:10px; margin-top:8px; align-items:flex-start;">
@@ -276,29 +281,31 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
   <div style="margin-top:auto;">
   <table class="signature-table" style="margin-top:8px; font-size:9pt;">
     <colgroup>
+      {% if has_any_signatory_id %}
       <col style="width:15%;"/>
       <col style="width:13%;"/>
       <col style="width:24%;"/>
       <col style="width:29%;"/>
       <col style="width:19%;"/>
+      {% else %}
+      <col style="width:17%;"/>
+      <col style="width:29%;"/>
+      <col style="width:33%;"/>
+      <col style="width:21%;"/>
+      {% endif %}
     </colgroup>
     <thead>
       <tr style="background:var(--navy);">
-        <th>Role</th><th>ID</th>
+        <th>Role</th>{% if has_any_signatory_id %}<th>ID</th>{% endif %}
         <th>Name</th><th>Signature</th><th>Date</th>
       </tr>
     </thead>
     <tbody>
-      {% for role, pid, name in [
-        ('DESIGNED BY', project.DESIGNED_BY_ID, project.DESIGNED_BY_NAME),
-        ('VERIFIED BY', project.VERIFIED_BY_ID, project.VERIFIED_BY_NAME),
-        ('CHECKED BY', project.CHECKED_BY_ID, project.CHECKED_BY_NAME),
-        ('REVIEWED BY', project.REVIEWED_BY_ID, project.REVIEWED_BY_NAME),
-        ('APPROVED BY', project.APPROVED_BY_ID, project.APPROVED_BY_NAME),
-      ] %}
+      {% for role, pid, name in signatory_rows %}
       <tr>
         <td style="font-weight:bold; color:var(--navy-mid);">{{ role }}</td>
-        <td>{{ pid }}</td><td>{{ name }}</td><td class="signature-cell"></td><td class="date-cell"></td>
+        {% if has_any_signatory_id %}<td>{{ pid }}</td>{% endif %}
+        <td>{{ name }}</td><td class="signature-cell"></td><td class="date-cell"></td>
       </tr>
       {% endfor %}
     </tbody>

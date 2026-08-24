@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-ARCO-080
-SCAFFOLD_DRAWING_NO: PMS-WA-ARCO-080
+DOCUMENT_NO:         PMS-WA-PFL-100
+SCAFFOLD_DRAWING_NO: PMS-WA-PFL-100
 REVISION:            0
 
 # Integrated outputs
@@ -24,8 +24,8 @@ COUNTERWEIGHT_PIVOT_NODES:   23,38,24
 COUNTERWEIGHT_SAFETY_FACTOR: 4
 
 # Scaffold location and type
-LOCATION:            LHU (Liquid handling unit)
-AREA:                C
+LOCATION:            Residential area (RA)
+AREA:                
 SCAFFOLD_TYPE:       
 RISK_LEVEL:          High
 
@@ -48,25 +48,24 @@ TIE_FORCE_FX:0.142
 TIE_FORCE_FZ:1.215
 TIE_FORCE_FY:9.467
 
-PERMIT_NO:           304281
-ERMT_NO:             PIC/PMS/26/3288
+PERMIT_NO:           
+ERMT_NO:             PIC/PMS/26/
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
-NOTE: The scaffold may require modification during the execution of the work; therefore, scaffolders may be present in the work area after the scaffold has been erected.
-WARNING:The crane shall be isolated before and throughout all scaffolding activities, including erection, modification, inspection, and dismantling. The Scaffold Supervisor shall verify and confirm crane isolation before requesting the Permit to Work. The area surrounding the crane shall be barricaded during scaffold erection, modification, and dismantling activities to prevent unauthorized access. This scaffold design is based on the assumption that these safety requirements are fully implemented. The designer and PIC team accepts no responsibility for incidents arising from failure to comply with these precautions
-
+NOTE: 
+WARNING:
 # Personnel
-DESIGNED_BY_ID:      PMS/C3-1141
-DESIGNED_BY_NAME:    Nnamani, Ifeanyi
+DESIGNED_BY_ID:      PMS/C4-121
+DESIGNED_BY_NAME:    Worika, Spencer
 VERIFIED_BY_ID:      PMS/612C
 VERIFIED_BY_NAME:    Olowo, Peter
-REVIEWED_BY_ID:      PIC/31C
-REVIEWED_BY_NAME:    Mustapha, Mahmud
-APPROVED_BY_ID:      PIC/1
-APPROVED_BY_NAME:    Edobor, Osahon
-CHECKED_BY_ID:       PMS/6
-CHECKED_BY_NAME:     Omikunle, Akinwale
+REVIEWED_BY_ID:      PIC/33C
+REVIEWED_BY_NAME:    Ezewoko, Joseph
+APPROVED_BY_ID:      PIC/2
+APPROVED_BY_NAME:    Tasieobi, Chima
+CHECKED_BY_ID:       
+CHECKED_BY_NAME:     
 PREPARED_BY_NAME:
 
 
@@ -74,21 +73,21 @@ PREPARED_BY_NAME:
 # Use EQUIPMENT_TAG for equipment-tagged jobs, or LINE_NUMBER for line-only jobs (no equipment
 # tag). Fill in only whichever one applies — EQUIPMENT_TAG takes precedence if both are set.
 EQUIPMENT_NAME:     
-EQUIPMENT_TAG:      GPD_84-BLD_B8414-ZK-001
+EQUIPMENT_TAG:      
 LINE_NUMBER:        
-WORK_ORDER:          4053642
-PURPOSE:             personnel access for lighting maintenance work on the Overhead Crane
+WORK_ORDER:          4073745
+PURPOSE:             personnel access for Ceiling maintenance
 STRUCTURE_ABOVE_GROUND_M: 
 WIND_CALC_HEIGHT_M: 
 DOC_LIFE:            3 Years
 
 # Deflection Check — auto-extracted from .out file SLS combination results.
 # Override only if auto-extraction fails:
-MAX_VERT_DISP_MM:0.293
-MAX_VERT_DISP_LC:6
-MAX_HORIZ_DISP_MM:0.524
-MAX_HORIZ_DISP_LC:6
+MAX_VERT_DISP_MM:6.413
+MAX_VERT_DISP_LC:12
+MAX_HORIZ_DISP_MM:2.580
+MAX_HORIZ_DISP_LC:12
 # Member ID whose length defines the span L for deflection limits (optional).
 # If blank, the member connected to the critical-displacement node is used automatically.
-MAX_VERT_MEMBER:20
-MAX_HORIZ_MEMBER:10
+MAX_VERT_MEMBER:3508
+MAX_HORIZ_MEMBER:3250
