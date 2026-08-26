@@ -11,8 +11,8 @@ scale = NTS
 revision = 0
 date = 
 drawn_by = Nnamani, Ifeanyi
-reviewed_by = Ezewoko, Joseph
-approved_by = Tasieobi, Chima
+reviewed_by = 
+approved_by = Sambo, Abubakar
 
 # Logos can be local files in the project root or image URLs.
 # PNG, JPG, and JPEG are supported. Local root files are tried before URLs.

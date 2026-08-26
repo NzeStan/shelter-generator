@@ -974,7 +974,7 @@ def main():
             ('VERIFIED BY', project.get('VERIFIED_BY_ID'), project.get('VERIFIED_BY_NAME')),
             ('CHECKED BY',  project.get('CHECKED_BY_ID'),  project.get('CHECKED_BY_NAME')),
             ('REVIEWED BY', project.get('REVIEWED_BY_ID'), project.get('REVIEWED_BY_NAME')),
-            ('APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
+            ('REVIEWED & APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
         )
         if str(name or '').strip()
     ]

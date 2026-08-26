@@ -219,7 +219,7 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
   </table>
 
   <div class="notice" style="margin-top:10px;">
-    {% if show_assurance_note %}SCAFFOLD TO BE INSPECTED BY PIC BEFORE TAGGING{% else %}SCAFFOLD TO BE INSPECTED &amp; TAGGED BEFORE USE{% endif %}
+    {% if show_assurance_note %}SCAFFOLD TO BE INSPECTED BY TES BEFORE TAGGING{% else %}SCAFFOLD TO BE INSPECTED &amp; TAGGED BEFORE USE{% endif %}
   </div>
 
   {# Brief description + site photo side by side #}
@@ -589,11 +589,11 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
 </table>
 <div class="callout">
   {% if structural.handrail_loads.has_x %}
-  Handrail Load (HLX) = <strong>{{ structural.handrail_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span>
+  Total Handrail Load (HLX) applied = <strong>{{ structural.handrail_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span>
   {% if structural.handrail_loads.udl_x %}(member UDL {{ structural.handrail_loads.udl_x }} kN/m){% endif %}<br/>
   {% endif %}
   {% if structural.handrail_loads.has_z %}
-  Handrail Load (HLZ) = <strong>{{ structural.handrail_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
+  Total Handrail Load (HLZ) applied = <strong>{{ structural.handrail_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
   {% if structural.handrail_loads.udl_z %}(member UDL {{ structural.handrail_loads.udl_z }} kN/m){% endif %}
   {% endif %}
 </div>
@@ -646,8 +646,8 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
   </tr>
 </table>
 <div class="callout">
-  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
-  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
+  Total Wind Load applied - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
+  Total Wind Load applied - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
 </div>
 {% else %}
 <div class="callout" style="font-size:8.5pt;">
@@ -866,7 +866,7 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
       <td style="text-align:center;">PIP483.6</td>
       <td style="text-align:center;">{% if m.status=='PASS' %}<span class="badge-pass">PASS</span>{% else %}<span class="badge-fail">FAIL</span>{% endif %}</td>
       <td style="text-align:center; font-size:7.5pt;">{{ m.clause }}</td>
-      <td style="text-align:center; font-weight:bold; {% if m.ratio>0.8 %}color:#dc3545;{% elif m.ratio>0.6 %}color:var(--gold);{% endif %}">{{ "%.3f"|format(m.ratio) }}</td>
+      <td style="text-align:center; font-weight:bold; color:#000;">{{ "%.3f"|format(m.ratio) }}</td>
       <td style="text-align:center;">{{ m.lc }}</td>
       <td style="text-align:center;">{{ "%.2f"|format(m.axial) }}</td>
       <td style="text-align:center;">{{ m.type or 'C' }}</td>

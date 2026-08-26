@@ -535,8 +535,8 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
   </tr>
 </table>
 <div class="callout">
-  Total Wind Load - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
-  Total Wind Load - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
+  Total Wind Load applied - X Axis (WLX) = <strong>{{ structural.wind_loads.total_x }} kN</strong> <span class="src-tag">(STAAD output)</span><br/>
+  Total Wind Load applied - Z Axis (WLZ) = <strong>{{ structural.wind_loads.total_z }} kN</strong> <span class="src-tag">(STAAD output)</span>
 </div>
 {% else %}
 <div class="callout" style="font-size:8.5pt;">
@@ -692,7 +692,7 @@ th .src-tag { display: block; margin-left: 0; margin-top: 1px; }
       <td style="text-align:center;">PIP483.6</td>
       <td style="text-align:center;">{% if m.status=='PASS' %}<span class="badge-pass">PASS</span>{% else %}<span class="badge-fail">FAIL</span>{% endif %}</td>
       <td style="text-align:center; font-size:7.5pt;">{{ m.clause }}</td>
-      <td style="text-align:center; font-weight:bold; {% if m.ratio>0.8 %}color:#dc3545;{% elif m.ratio>0.6 %}color:var(--gold);{% endif %}">{{ "%.3f"|format(m.ratio) }}</td>
+      <td style="text-align:center; font-weight:bold; color:#000;">{{ "%.3f"|format(m.ratio) }}</td>
       <td style="text-align:center;">{{ m.lc }}</td>
       <td style="text-align:center;">{{ "%.2f"|format(m.axial) }}</td>
       <td style="text-align:center;">{{ m.type or 'C' }}</td>

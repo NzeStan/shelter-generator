@@ -515,41 +515,38 @@ def _platform_live_workings(project, structural):
             if tributary_width:
                 line_load = round(intensity * tributary_width, 3)
         role = entry.get("member_role") or "Loaded"
-        key = (
-            y_mid,
-            entry.get("load_case"),
-            entry.get("title") or "LL",
-            role,
-            # Numeric width, not the display string — "0.830 + 0.835" and "0.835 + 0.830"
-            # are the same tributary width and must collapse into one row, even though
-            # the breakdown text differs depending on which side of the member is wider.
-            round(float(tributary_width), 3) if tributary_width else None,
-            round(float(intensity), 3),
-            round(float(line_load), 3),
-        )
-        row = grouped.setdefault(key, {
+        # Group purely by platform level / load case / role - members STAAD applies
+        # ONE uniform UDL to (e.g. "3493 TO 3523 UNI GY -1.829") must collapse into a
+        # single row, even when their individually-computed tributary widths differ
+        # by a millimetre or two (real, tiny bay-spacing noise in the STAAD geometry,
+        # not a different design condition). Keying on the exact width/intensity/load
+        # split one applied UDL into several near-duplicate rows. The governing
+        # (largest) tributary width found in the group is kept as the single,
+        # conservative representative value shown on that row.
+        key = (y_mid, entry.get("load_case"), entry.get("title") or "LL", role)
+        candidate = {
             "y_mid": y_mid,
             "load_case": entry.get("load_case"),
             "title": entry.get("title") or "LL",
-            "member_ids": [],
             "member_role": role,
             "load_intensity_kn_m2": round(float(intensity), 3),
-            "tributary_width_m": round(float(tributary_width), 3),
+            "tributary_width_m": round(float(tributary_width), 3) if tributary_width else 0.0,
             "tributary_width_display": tw_display,
             "line_load_kn_m": round(float(line_load), 3),
-            "load_class": _load_class_for_intensity(intensity),
+            "load_class": matched_class,
             "intensity_source": intensity_source or "STAAD LL / tributary width",
-        })
-        if entry.get("member_id"):
-            row["member_ids"].append(entry["member_id"])
+        }
+        existing = grouped.get(key)
+        if existing is None or candidate["tributary_width_m"] > existing["tributary_width_m"]:
+            grouped[key] = candidate
 
     all_rows = []
     live_case_count = len(loads.get("platform_live_cases") or [])
     for row in grouped.values():
-        member_label = _format_member_ids(row.pop("member_ids"))
+        member_display = row["member_role"]
         if live_case_count > 1 and row.get("load_case"):
-            member_label = f"LC {row['load_case']}: {member_label}"
-        row["member_display"] = f"{member_label} ({row['member_role']})"
+            member_display = f"LC {row['load_case']}: {member_display}"
+        row["member_display"] = member_display
         row["working"] = (
             f"{_format_load_value(row['load_intensity_kn_m2'])} × "
             f"{_fmt_width(row['tributary_width_m'])} = {_format_load_value(row['line_load_kn_m'])}"
@@ -2086,7 +2083,7 @@ def main():
             ('VERIFIED BY', project.get('VERIFIED_BY_ID'), project.get('VERIFIED_BY_NAME')),
             ('CHECKED BY',  project.get('CHECKED_BY_ID'),  project.get('CHECKED_BY_NAME')),
             ('REVIEWED BY', project.get('REVIEWED_BY_ID'), project.get('REVIEWED_BY_NAME')),
-            ('APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
+            ('REVIEWED & APPROVED BY', project.get('APPROVED_BY_ID'), project.get('APPROVED_BY_NAME')),
         )
         if str(name or '').strip()
     ]

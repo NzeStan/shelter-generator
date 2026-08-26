@@ -24,8 +24,8 @@ COUNTERWEIGHT_PIVOT_NODES:   23,38,24
 COUNTERWEIGHT_SAFETY_FACTOR: 4
 
 # Scaffold location and type
-LOCATION:            Residential area (RA)
-AREA:                
+LOCATION:            RA International school
+AREA:                Residential area (RA)
 SCAFFOLD_TYPE:       
 RISK_LEVEL:          High
 
@@ -49,7 +49,7 @@ TIE_FORCE_FZ:1.215
 TIE_FORCE_FY:9.467
 
 PERMIT_NO:           
-ERMT_NO:             PIC/PMS/26/
+ERMT_NO:             TES/PMS/26/
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
@@ -60,10 +60,10 @@ DESIGNED_BY_ID:      PMS/C4-121
 DESIGNED_BY_NAME:    Worika, Spencer
 VERIFIED_BY_ID:      PMS/612C
 VERIFIED_BY_NAME:    Olowo, Peter
-REVIEWED_BY_ID:      PIC/33C
-REVIEWED_BY_NAME:    Ezewoko, Joseph
-APPROVED_BY_ID:      PIC/2
-APPROVED_BY_NAME:    Tasieobi, Chima
+REVIEWED_BY_ID:      
+REVIEWED_BY_NAME:    
+APPROVED_BY_ID:      TES/1
+APPROVED_BY_NAME:    Sambo, Abubakar
 CHECKED_BY_ID:       
 CHECKED_BY_NAME:     
 PREPARED_BY_NAME:
