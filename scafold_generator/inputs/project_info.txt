@@ -2,8 +2,8 @@
 # Lines starting with # are ignored. Format: KEY: value
 
 # Document
-DOCUMENT_NO:         PMS-WA-PFL-100
-SCAFFOLD_DRAWING_NO: PMS-WA-PFL-100
+DOCUMENT_NO:         PMS-WA-PFL-1000
+SCAFFOLD_DRAWING_NO: PMS-WA-PFL-1000
 REVISION:            0
 
 # Integrated outputs
@@ -49,7 +49,7 @@ TIE_FORCE_FZ:1.215
 TIE_FORCE_FY:9.467
 
 PERMIT_NO:           
-ERMT_NO:             TES/PMS/26/
+ERMT_NO:             TES/PMS/26/3484
 
 # Optional cover-page callouts, shown once under Brief Description (after the tie display
 # if this project has ties). Leave blank to omit entirely.
